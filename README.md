@@ -23,13 +23,6 @@ A requisição ao endpoint `Get Credit Price` é necessária para garantir que o
 FIGMA:
 [LAYOUT](https://www.figma.com/design/3dbuGSs6oCSLkPw9viSsfT/Front-end-Teste?node-id=0-1&t=KvUCyOT5Miiuh0D5-1)
 
-## GIT
-- Faça um fork deste repositório.
-- Criar uma branch para codar as suas features.
-- Criar um pull-request quando o teste for finalizado e submetido.
-
-##### **NOTA: Será avaliado também se o nome da branch, títulos de commit, push e comentários possuem boa legibilidade.**
-
 ## Consumo da API Mock
 
 Caso você tenha dificuldades ao utilizar a API Mock disponibilizada, é possível criar um mock diretamente no **Postman** utilizando a coleção fornecida na pasta **docs**. 
@@ -67,3 +60,14 @@ Siga as etapas abaixo para importar a coleção e testar os endpoints do checkou
 - Manutenibilidade do Código.
 - Utilizar inglês no projeto todo.
 - Fazer deploy do mesmo (heroku, netlify, aws, vercel, github pages ou outro da preferência).
+
+## GIT
+- Faça um fork deste repositório.
+- Criar uma branch para codar as suas features.
+- Criar um pull-request quando o teste for finalizado e submetido.
+
+## Contato técnico.
+Junior Schmidt
+GSS | Desenvolvedor Back-end & Tech Lead.
+schmidt@repenso.eco
+www.gss.eco
