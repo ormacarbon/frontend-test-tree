@@ -30,7 +30,7 @@ FIGMA:
 
 ## FRAMEWORK
 
-- Utilizar as ferramentas presentes no framework do projeto (NEXT.JS).
+- [NEXT.JS](https://nextjs.org/docs)
 
 -----------------------------------------------------
 
@@ -44,5 +44,6 @@ FIGMA:
 
 - Animações.
 - Código performático.
+- Manutenibilidade do Código.
 - Utilizar inglês no projeto todo.
 - Fazer deploy do mesmo (heroku, netlify, aws, vercel, github pages ou outro da preferência).
