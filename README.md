@@ -25,7 +25,7 @@ FIGMA:
 
 ## Consumo da API Mock
 
-Caso você tenha dificuldades ao utilizar a API Mock disponibilizada, é possível criar um mock diretamente no **Postman** utilizando a coleção fornecida na pasta **docs**. 
+Use a API mock do Postman diponibilizada em /docs.
 
 ### Importação da Coleção do Postman
 
