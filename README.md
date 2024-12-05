@@ -1,20 +1,24 @@
 # Desafio: Checkout para Compensação de Carbono
 
-Neste teste, você deverá reproduzir um layout do figma de checkout fictício para compensação de carbono.
+Neste desafio, você deverá recriar um layout de checkout fictício para compensação de carbono, conforme o design fornecido no Figma. Além disso, será necessário consumir dois endpoints da API:
+
+1. **Obter o valor do crédito**: Esse endpoint será responsável por retornar o valor do crédito de carbono, que deve ser exibido durante o checkout.
+2. **Simulação de processamento de pagamento**: O segundo endpoint será utilizado para simular o processamento de um pagamento após o usuário completar o checkout.
+
+Ambos os endpoints devem ser integrados na aplicação de forma que a experiência do usuário no checkout seja fluida e os valores exibidos no sistema estejam corretos.
 
 ## Requisitos
 
 - **URL do Checkout:** A aplicação deve utilizar um URL no seguinte formato:
-https://meu-teste.com/checkout?co2=1
+````https://meu-teste.com/checkout?co2=1&cred=2````
 
-- **Cálculo do Valor Total:** 
-- Cada unidade de CO₂ (crédito de carbono) custará R$157.
-- O valor total do checkout deve ser atualizado dinamicamente com base na quantidade de CO₂ informada no parâmetro `co2` da URL.
+Onde:
+- **`co2`**: Representa a quantidade de carbono.
+- **`cred`**: Representa o valor do crédito (ou `creditPriceId`).
 
-## Exemplo
+O valor do crédito de carbono, que será atribuído ao parâmetro `cred` (ou `creditPriceId`), deve ser recuperado através do endpoint **`get credit price`**. Esse endpoint está documentado na pasta **`doc`** e retorna o valor do crédito de carbono associado ao `creditPriceId`. A aplicação deve realizar a requisição para esse endpoint para obter o valor correspondente e preenchê-lo dinamicamente o valor no checkout.
 
-- Para `co2=1`: O valor será R$157.
-- Para `co2=5`: O valor será R$785.
+A requisição ao endpoint `Get Credit Price` é necessária para garantir que o valor do crédito esteja sempre atualizado e de acordo com as especificações do sistema.
 
 FIGMA:
 [LAYOUT](https://www.figma.com/design/3dbuGSs6oCSLkPw9viSsfT/Front-end-Teste?node-id=0-1&t=KvUCyOT5Miiuh0D5-1)
@@ -25,6 +29,22 @@ FIGMA:
 - Criar um pull-request quando o teste for finalizado e submetido.
 
 ##### **NOTA: Será avaliado também se o nome da branch, títulos de commit, push e comentários possuem boa legibilidade.**
+
+## Consumo da API Mock
+
+Caso você tenha dificuldades ao utilizar a API Mock disponibilizada, é possível criar um mock diretamente no **Postman** utilizando a coleção fornecida na pasta **docs**. 
+
+### Importação da Coleção do Postman
+
+Siga as etapas abaixo para importar a coleção e testar os endpoints do checkout.
+
+1. Abra o Postman.
+2. Clique no botão **Importar** no canto superior esquerdo.
+![Onde clicar no postman para importar](./docs/image.png)
+3. Selecione o arquivo `Carbon_Checkout.postman_collection.json` localizado na pasta `doc/`.
+
+![Como deve ficar apos a importação.](./docs/image-2.png)
+4. Execute os testes com os parâmetros fornecidos para verificar o funcionamento correto da aplicação.
 
 -----------------------------------------------------
 
@@ -42,7 +62,7 @@ FIGMA:
 
 ## REQUISITOS DIFERENCIAIS:
 
-- Animações.
+- Back-end (para desenvolvedores full-stack)
 - Código performático.
 - Manutenibilidade do Código.
 - Utilizar inglês no projeto todo.
