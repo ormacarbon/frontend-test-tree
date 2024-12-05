@@ -67,7 +67,8 @@ Siga as etapas abaixo para importar a coleção e testar os endpoints do checkou
 - Criar um pull-request quando o teste for finalizado e submetido.
 
 ## Contato técnico.
-Junior Schmidt
-GSS | Desenvolvedor Back-end & Tech Lead.
-schmidt@repenso.eco
-www.gss.eco
+
+    Junior Schmidt
+    GSS | Desenvolvedor Back-end & Tech Lead.
+    schmidt@repenso.eco
+    www.gss.eco
