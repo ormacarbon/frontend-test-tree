@@ -12,6 +12,7 @@ Endpoint mock para o teste.
 
 ```json
 {   "co2": 1, // Quantidade de credito a ser comprada.
+    "cred": 1, // Representa o valor unitario do crédito (ou creditPriceId).
     "card_number": "5031433215406351",
     "expiration_month": 11,
     "expiration_year": 2025,

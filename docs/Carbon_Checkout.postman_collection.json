@@ -5,7 +5,7 @@
 		"description": "Endpoint mock para o teste.\n\n[https://github.com/ormacarbon/frontend-test-tree](https://github.com/ormacarbon/frontend-test-tree)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26419240",
-		"_collection_link": "https://gss-carbon.postman.co/workspace/cf424c6c-9776-4623-a062-4e077fe65a91/collection/26419240-0e625ff5-5331-423f-8651-39ad88f64aa4?action=share&source=collection_link&creator=26419240"
+		"_collection_link": "https://gss-carbon.postman.co/workspace/GSS-Carbon~cf424c6c-9776-4623-a062-4e077fe65a91/collection/26419240-0e625ff5-5331-423f-8651-39ad88f64aa4?action=share&source=collection_link&creator=26419240"
 	},
 	"item": [
 		{
@@ -37,7 +37,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{   \"co2\": 1, // Quantidade de credito a ser comprada.\r\n    \"card_number\": \"5031433215406351\",\r\n    \"expiration_month\": 11,\r\n    \"expiration_year\": 2025,\r\n    \"security_code\": \"123\",\r\n    \"cardholder\": {\r\n        \"name\": \"Augusto de C R dos Anjos\",\r\n        \"identification\": {\r\n            \"type\": \"CPF\",\r\n            \"number\": \"12345678909\"\r\n        }\r\n    }\r\n}",
+					"raw": "{   \"co2\": 1, // Quantidade de credito a ser comprada.\r\n    \"cred\": 1, // Representa o valor unitario do crédito (ou creditPriceId).\r\n    \"card_number\": \"5031433215406351\",\r\n    \"expiration_month\": 11,\r\n    \"expiration_year\": 2025,\r\n    \"security_code\": \"123\",\r\n    \"cardholder\": {\r\n        \"name\": \"Augusto de C R dos Anjos\",\r\n        \"identification\": {\r\n            \"type\": \"CPF\",\r\n            \"number\": \"12345678909\"\r\n        }\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -70,15 +70,11 @@
 							}
 						},
 						"url": {
-							"raw": "https://6751f822d1983b9597b4fa68.mockapi.io/api/payment",
-							"protocol": "https",
+							"raw": "{{url}}/payment",
 							"host": [
-								"6751f822d1983b9597b4fa68",
-								"mockapi",
-								"io"
+								"{{url}}"
 							],
 							"path": [
-								"api",
 								"payment"
 							]
 						}
@@ -264,15 +260,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://6751f822d1983b9597b4fa68.mockapi.io/api/credit-price/1",
-							"protocol": "https",
+							"raw": "{{url}}/credit-price/1",
 							"host": [
-								"6751f822d1983b9597b4fa68",
-								"mockapi",
-								"io"
+								"{{url}}"
 							],
 							"path": [
-								"api",
 								"credit-price",
 								"1"
 							]
@@ -378,15 +370,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://6751f822d1983b9597b4fa68.mockapi.io/api/credit-price",
-							"protocol": "https",
+							"raw": "{{url}}/credit-price",
 							"host": [
-								"6751f822d1983b9597b4fa68",
-								"mockapi",
-								"io"
+								"{{url}}"
 							],
 							"path": [
-								"api",
 								"credit-price"
 							]
 						}
