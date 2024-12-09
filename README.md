@@ -14,7 +14,7 @@ Ambos os endpoints devem ser integrados na aplicação de forma que a experiênc
 
 Onde:
 - **`co2`**: Representa a quantidade de carbono.
-- **`cred`**: Representa o valor do crédito (ou `creditPriceId`).
+- **`cred`**: Representa o valor unitario do crédito (ou creditPriceId).
 
 O valor do crédito de carbono, que será atribuído ao parâmetro `cred` (ou `creditPriceId`), deve ser recuperado através do endpoint **`get credit price`**. Esse endpoint está documentado na pasta **`doc`** e retorna o valor do crédito de carbono associado ao `creditPriceId`. A aplicação deve realizar a requisição para esse endpoint para obter o valor correspondente e preenchê-lo dinamicamente o valor no checkout.
 
