@@ -1,73 +1,117 @@
-# Desafio: Checkout para Compensação de Carbono
+# Checkout Carbon
 
-Neste desafio, você deverá recriar um layout de checkout fictício para compensação de carbono, conforme o design fornecido no Figma. Além disso, será necessário consumir dois endpoints da API:
+## App
 
-1. **Obter o valor do crédito**: Esse endpoint será responsável por retornar o valor do crédito de carbono, que deve ser exibido durante o checkout.
-2. **Simulação de processamento de pagamento**: O segundo endpoint será utilizado para simular o processamento de um pagamento após o usuário completar o checkout.
+- https://frontend-test-tree.vercel.app/
 
-Ambos os endpoints devem ser integrados na aplicação de forma que a experiência do usuário no checkout seja fluida e os valores exibidos no sistema estejam corretos.
+## Principais Tecnologias utilizadas
 
-## Requisitos
+- Next
+- daisyUI
+- Tailwind
+- Typescript
 
-- **URL do Checkout:** A aplicação deve utilizar um URL no seguinte formato:
-````https://meu-teste.com/checkout?co2=1&cred=2````
+## Instalação
 
-Onde:
-- **`co2`**: Representa a quantidade de carbono.
-- **`cred`**: Representa o valor unitario do crédito (ou creditPriceId).
+- Clone o repositório com
+  ```
+  git clone https://github.com/Junior331/frontend-test-tree.git
+  ```
+- É necessario ter o Node 20x ou superior instalado
+- Para iniciar o servidor de desenvolvimento rode os comandos abaixo
 
-O valor do crédito de carbono, que será atribuído ao parâmetro `cred` (ou `creditPriceId`), deve ser recuperado através do endpoint **`get credit price`**. Esse endpoint está documentado na pasta **`doc`** e retorna o valor do crédito de carbono associado ao `creditPriceId`. A aplicação deve realizar a requisição para esse endpoint para obter o valor correspondente e preenchê-lo dinamicamente o valor no checkout.
+```
+yarn
+yarn dev
+```
 
-A requisição ao endpoint `Get Credit Price` é necessária para garantir que o valor do crédito esteja sempre atualizado e de acordo com as especificações do sistema.
+### To do
 
-FIGMA:
-[LAYOUT](https://www.figma.com/design/3dbuGSs6oCSLkPw9viSsfT/Front-end-Teste?node-id=0-1&t=KvUCyOT5Miiuh0D5-1)
+- [x] Criar estrutura inicial do projeto
+- [x] Implementação de Theme e Style
+- [ ] Criar componentes
+- [ ] Criar tela Home
+- [ ] Criar tela status da compra
 
-## Consumo da API Mock
+  ### Pages
 
-Use a API mock do Postman diponibilizada em /docs.
+     - [ ] Home
+     - [ ] StatusTransaction
 
-### Importação da Coleção do Postman
+  ### Components
 
-Siga as etapas abaixo para importar a coleção e testar os endpoints do checkout.
+  ## Elements
 
-1. Abra o Postman.
-2. Clique no botão **Importar** no canto superior esquerdo.
-![Onde clicar no postman para importar](./docs/image.png)
-3. Selecione o arquivo `Carbon_Checkout.postman_collection.json` localizado na pasta `doc/`.
+     - [ ] Input
+     - [ ] Button
+     - [ ] Select
+     - [ ] Loading
+     - [ ] ControllerTheme
 
-![Como deve ficar apos a importação.](./docs/image-2.png)
-4. Execute os testes com os parâmetros fornecidos para verificar o funcionamento correto da aplicação.
+  ## Organism
 
------------------------------------------------------
+  - [x] Layout
 
-## FRAMEWORK
+  ## Modules
 
-- [NEXT.JS](https://nextjs.org/docs)
+     - [ ] Card
+     - [ ] Header
 
------------------------------------------------------
+### Descrição da estrutura do projeto
 
-## ESTILOS
+- `Átomo (elements)`: Os átomos são componentes básicos e individuais, como botões, inputs, selects, etc. Um menu lateral geralmente é composto por diversos elementos, como ícones, textos, talvez até mesmo botões para navegação, e cada um desses elementos pode ser considerado um átomo. No entanto, o menu lateral como um todo é mais complexo do que apenas um único átomo.
 
-- Os estilos deste teste devem ser feitos em styled-components (ou tailwind).
-- O projeto ser o mais proximo possivel do layout fornecido.
-- Deve ser totalmente responsivo.
+- `Molécula (modules)`: As moléculas são compostas por átomos e têm uma funcionalidade mais complexa. Um menu lateral poderia ser considerado uma molécula se fosse composto por vários átomos (como botões, ícones, etc.) agrupados de uma maneira específica para uma função específica. No entanto, um menu lateral geralmente representa uma parte maior e mais significativa da interface do usuário.
 
-## REQUISITOS DIFERENCIAIS:
+- `Organismo (organism)`: Os organismos são componentes mais complexos que combinam vários átomos e/ou moléculas para formar uma parte significativa de uma interface. Um menu lateral se encaixa nessa definição, pois geralmente consiste em uma combinação de vários elementos (como itens de menu, ícones, títulos, etc.) agrupados para formar uma parte distinta e funcional da interface do usuário.
 
-- Back-end (para desenvolvedores full-stack)
-- Código performático.
-- Manutenibilidade do Código.
-- Utilizar inglês no projeto todo.
-- Fazer deploy do mesmo (heroku, netlify, aws, vercel, github pages ou outro da preferência).
+- `Hooks`: Os hooks são funções especiais que permitem que você use o estado e outros recursos do React dentro de componentes de função. Eles foram introduzidos no React 16.8 para permitir o uso de estado e outras funcionalidades anteriormente disponíveis apenas em componentes de classe em componentes de função.
 
-## GIT
-- Faça um fork deste repositório.
-- Criar uma branch para codar as suas features.
-- Criar um pull-request quando o teste for finalizado e submetido.
+- `Pages`: As páginas geralmente representam as diferentes rotas da aplicação, cada uma correspondendo a uma URL específica. As páginas são componentes que são renderizados quando o usuário navega para uma determinada rota. Elas são responsáveis por exibir o conteúdo relevante para essa rota específica e podem conter outros componentes, como formulários, listas, gráficos, etc. As páginas geralmente são compostas por uma combinação de componentes de apresentação e lógica, e podem ser estruturadas de acordo com as necessidades da aplicação.
 
-## Contato técnico.
-- Junior Schmidt
-- GSS | Desenvolvedor Back-end & Tech Lead.
-- schmidt@repenso.eco
-- www.gss.eco
+- `Utils`: desempenha um papel crucial na organização e eficiência do código da aplicação. Ela abriga uma variedade de utilitários que são essenciais para diferentes partes da aplicação, ex: (endpoints, renderCustom, types, utils).
+
+- `Styles (Theme)`: O tema do projeto é uma parte fundamental da estilização da aplicação, definindo as cores, estilos tipográficos e outros aspectos visuais que são aplicados em toda a interface do usuário. Abaixo, descrevo os principais elementos do tema:
+
+### Estrutura do projeto
+
+    ├── src/
+    │   ├── app/
+    │   │   ├── assets/
+    │   │   │   └── images/
+    │   │   │   │   ├── icons/
+    │   │   │   │   │   ├── placeholder.png
+    │   │   │   │   │   └── index
+    │   │   │   │   ├── import-png.d
+    │   │   │   │   ├── import-svg.d
+    │   │   │   │   ├── placeholder.svg
+    │   │   │   │   ├── image_not_found.png
+    │   │   │   │   └── index
+    │   │   ├── components/
+    │   │   │   ├── elements/
+    │   │   │   │   ├── Input
+    │   │   │   │   ├── Select
+    │   │   │   │   ├── Button
+    │   │   │   │   ├── ControllerTheme
+    │   │   │   │   └── index
+    │   │   │   ├── modules/
+    │   │   │   │   ├── Header
+    │   │   │   │   └── index
+    │   │   │   └── organism/
+    │   │   │   │   ├── Layout
+    │   │   │   │   └── index
+    │   │   ├── hooks/
+    │   │   │   └── axiosAdapter
+    │   │   ├── pages/
+    │   │   │   └── index
+    │   │   ├── styles/
+    │   │   │   └── globals
+    └───────└── utils/
+    │   │   │   ├── utils
+    │   │   │   ├── types
+    │   │   │   └── endpoints
+
+- O diretório `src/app/` contém todos os componentes do projeto, organizados de acordo com o padrão atomic.
+  Cada componente é classificado como `átomo (atom)`, `molécula (molecule)` ou `organismo (organism)`, conforme
+  sua complexidade e reutilização.
+

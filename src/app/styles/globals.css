@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    --span: #000000;
+    --text:  #00A19D;
+    --error: #FC311D; 
+    --title:  #00A19D;
+    --border: #00000040; 
+    --background: #FFFFFF;
+
+    --button: #00A19D;
+    --button-text: #B0B0B0;
+  }
+
+  .dark {
+    --span: #ffffff;
+    --text:  #d5d7dd;
+    --error: #FC311D; 
+    --title:  #d0d2d6;
+    --background: #2d3a4c;
+    --border: #ffffff40; 
+
+    --button: #283046;
+    --button-text: #f8f8f8;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border font-sans;
+  }
+  body {
+    @apply bg-background;
+    overflow-x: hidden;
+  }
+
+  body > * &::-webkit-scrollbar {
+    width: 5px;
+  }
+  body > * &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: transparent;
+  }
+  body > * &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #c4c4c4;
+  }
+
+  input:-webkit-autofill {
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  /* Tema claro */
+  body input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    -webkit-text-fill-color: #a6adbb;
+  }
+
+  /* Tema escuro */
+  .dark input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #283046 inset;
+    -webkit-text-fill-color: #a6adbb;
+  }
+}
