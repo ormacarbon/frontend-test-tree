@@ -20,9 +20,11 @@ const config: Config = {
     extend: {
       colors: {
         span: "var(--span)",
+        line: "var(--line)",
         text: "var(--text)",
         title: "var(--title)",
         error: "var(--error)",
+        input: "var(--input)",
         border: "var(--border)",
         button: "var(--button)",
         background: "var(--background)",
