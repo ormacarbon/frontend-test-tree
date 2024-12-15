@@ -14,9 +14,8 @@ import { selectInstallments } from "@/utils/selectInstalment";
 export default function Checkout() {
   const searchParams = useSearchParams();
 
-  // Pegando os valores dos parâmetros
-  const co2 = Number(searchParams.get("co2")) | 1;
-  const cred = Number(searchParams.get("cred")) | 2;
+  const co2 = Number(searchParams.get("co2")) || 1;
+  const cred = Number(searchParams.get("cred")) || 2;
   const {
     register,
     handleSubmit,
