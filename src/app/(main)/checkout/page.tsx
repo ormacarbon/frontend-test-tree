@@ -60,13 +60,13 @@ export default function Checkout() {
           <div className="flex flex-row justify-between">
             <BasicInput
               label="Telefone"
-              className="max-w-[300px]"
+              className="max-w-[155px] lg:max-w-[300px]"
               placeholder="(99) 9 9999-9999"
             />
             <BasicInput
               {...register("cardholder.identification.number")}
               label="CPF"
-              className="max-w-[230px]"
+              className="max-w-[140px] lg:max-w-[230px]"
               placeholder="999.999.999-99"
             />
           </div>
@@ -85,13 +85,13 @@ export default function Checkout() {
               <div className="flex flex-row items-center gap-2">
                 <BasicInput
                   {...register("expiration_month")}
-                  className="max-w-[85px]"
+                  className="lgmax-w-[85px] max-w-[55px]"
                   placeholder="MM"
                 />
                 <span className="text-primary-500 font-bold text-4xl">/</span>
                 <BasicInput
                   {...register("expiration_year")}
-                  className="max-w-[85px]"
+                  className="lgmax-w-[85px] max-w-[55px]"
                   placeholder="AA"
                 />
               </div>
@@ -99,7 +99,7 @@ export default function Checkout() {
             <BasicInput
               {...register("security_code")}
               label="CVC/CVV"
-              className="max-w-[230px]"
+              className="max-w-[140px] lg:max-w-[230px]"
               placeholder="999"
             />
           </div>
