@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 const config: Config = {
   darkMode: ["class"],
@@ -25,6 +26,7 @@ const config: Config = {
         title: "var(--title)",
         error: "var(--error)",
         input: "var(--input)",
+        circle: "var(--circle)",
         border: "var(--border)",
         button: "var(--button)",
         background: "var(--background)",
@@ -34,6 +36,9 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        roboto: ["var(--font-roboto)", ...fontFamily.sans],
       },
     },
   },

@@ -1,11 +1,13 @@
+import { roboto } from "@/app/assets/fonts";
 import { Props } from "./@types";
 
-const Text = ({ children, className, ...rest }: Props) => {
+export const Text = ({ children, className, ...rest }: Props) => {
   return (
-    <p className={`text-default ${className}`} {...rest}>
+    <p
+      className={`text-default ${roboto.className} ${className} `}
+      {...rest}
+    >
       {children}
     </p>
   );
 };
-
-export { Text };

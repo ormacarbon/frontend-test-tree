@@ -1,53 +1,74 @@
-// import { render, screen, fireEvent } from '@testing-library/react';
-// import { Input } from './Input';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Input } from './Input';
 
-// describe('Input component', () => {
+describe('Input component', () => {
 
-//   const mockProps = {
-//     error: true,
-//     type: 'text',
-//     id: 'test-input',
-//     name: 'test-input',
-//     label: 'Test Label',
-//     linkLabel: 'Test Link Label',
-//     placeholder: 'Test Placeholder',
-//     helperText: 'Test Error Message',
-//     children: <div>Test Children</div>,
-//   };
+  const mockProps = {
+    error: false,
+    type: 'text',
+    maxLength: 50,
+    id: 'test-input',
+    name: 'test-input',
+    value: 'Test value',
+    label: 'Test Label',
+    className: 'input_test',
+    placeholder: 'Test Placeholder',
+    helperText: 'Test Error Message',
+  };
 
-//   test('renders label if provided', () => {
-//     render(<Input label={mockProps.label} />);
-//     expect(screen.getByText(mockProps.label)).toBeInTheDocument();
-//   });
+  it("renders without errors", () => {
+    render(<Input />);
+  });
 
-//   test('renders link label if provided', () => {
-//     render(<Input linkLabel={mockProps.linkLabel} />);
-//     expect(screen.getByText(mockProps.linkLabel)).toBeInTheDocument();
-//   });
+  test('renders label if provided', () => {
+    render(<Input label={mockProps.label} />);
+    expect(screen.getByText(mockProps.label)).toBeInTheDocument();
+  });
 
-//   test('renders error message if error prop is provided', () => {
-//     render(<Input error={mockProps.error} helperText={mockProps.helperText} />);
-//     expect(screen.getByText(mockProps.helperText)).toBeInTheDocument();
-//   });
+  it("renders the input element", () => {
+    const { getByRole } = render(<Input />);
+    expect(getByRole("textbox")).toBeInTheDocument();
+  });
 
-//   test('renders children if provided', () => {
-//     render(<Input >{mockProps.children}</Input>);
-//     expect(screen.getByText('Test Children')).toBeInTheDocument();
-//   });
+  it("passes value prop to the input element", () => {
+    const { getByRole } = render(<Input value={mockProps.value} />);
+    expect(getByRole("textbox")).toHaveValue(mockProps.value);
+  });
 
-//   test('triggers preventDefault on mouse down event for children', () => {
-//     render(<Input >{mockProps.children}</Input>);
-//     const childElement = screen.getByText('Test Children');
-//     fireEvent.mouseDown(childElement);
-//     expect(childElement).not.toHaveFocus();
-//   });
+  it("calls onChange callback when input value changes", () => {
+    const handleChange = jest.fn();
+    const { getByRole } = render(<Input onChange={handleChange} />);
+    fireEvent.change(getByRole("textbox"), { target: { value: mockProps.value } });
+    expect(handleChange).toHaveBeenCalledTimes(1);
+    expect(handleChange).toHaveBeenCalledWith(expect.any(Object));
+  });
 
-//   test('passes remaining props to input element', () => {
-//     render(<Input {...mockProps} />);
-//     const inputElement = screen.getByPlaceholderText('Test Placeholder');
-//     expect(inputElement).toBeInTheDocument();
-//     expect(inputElement).toHaveAttribute('id', 'test-input');
-//     expect(inputElement).toHaveAttribute('name', 'test-input');
-//     expect(inputElement).toHaveAttribute('type', 'text');
-//   });
-// });
+  it("passes maxLength prop to the input element", () => {
+    const { getByRole } = render(<Input maxLength={mockProps.maxLength} />);
+    expect(getByRole("textbox")).toHaveAttribute("maxLength", "50");
+  });
+
+  test('renders error message if error prop is provided', () => {
+    render(<Input error={!mockProps.error} helperText={mockProps.helperText} />);
+    expect(screen.getByText(mockProps.helperText)).toBeInTheDocument();
+  });
+
+  it("does not render the error message if error prop is false", () => {
+    const { queryByText } = render(<Input helperText="Invalid input" />);
+    expect(queryByText("Invalid input")).toBeNull();
+  });
+
+  it("applies the className prop to the label element", () => {
+    const { container } = render(<Input className="custom-input" />);
+    expect(container.querySelector(".form-control")).toHaveClass("custom-input");
+  });
+
+  test('passes remaining props to input element', () => {
+    render(<Input {...mockProps} />);
+    const inputElement = screen.getByPlaceholderText(mockProps.placeholder);
+    expect(inputElement).toBeInTheDocument();
+    expect(inputElement).toHaveAttribute('id', mockProps.id);
+    expect(inputElement).toHaveAttribute('name', mockProps.name);
+    expect(inputElement).toHaveAttribute('type', mockProps.type);
+  });
+});

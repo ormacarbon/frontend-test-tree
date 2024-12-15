@@ -1,6 +1,6 @@
 import { Props } from "./@types";
 
-const Button = ({
+export const Button = ({
   loading,
   children,
   className,
@@ -16,5 +16,3 @@ const Button = ({
     </button>
   );
 };
-
-export { Button };

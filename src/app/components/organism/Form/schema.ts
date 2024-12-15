@@ -1,63 +1,67 @@
-import { z as zod } from "zod";
+import * as yup from "yup";
 
-export const schema = zod.object({
-  email: zod.string().email("Invalid email address."),
+export const schema = yup.object().shape({
+  email: yup.string().email("Endereço de e-mail inválido."),
+  security_code: yup
+    .number()
+    .required("CVC/CVV é um campo obrigatório.")
+    .typeError("CVC/CVV deve ser um número.")
+    .min(100, "CVC/CVV deve ser um número de 3 dígitos.")
+    .max(999, "CVC/CVV deve ser um número de 3 dígitos."),
+  cpf: yup
+    .string()
+    .required("CPF é um campo obrigatório.")
+    .transform((value) => value.replace(/[^\d]/g, ""))
+    .matches(/^\d{11}$/, "O CPF deve ser um número válido de 11 dígitos."),
 
-  cvv: zod
-    .number({
-      required_error: "CVV is a required field.",
-      invalid_type_error: "CVV must be a number.",
-    })
-    .min(100, "CVV must be a 3-digit number.")
-    .max(999, "CVV must be a 3-digit number."),
+  name: yup
+    .string()
+    .required("Nome é um campo obrigatório.")
+    .min(3, "O nome deve ter pelo menos 3 caracteres."),
 
-  cpf: zod
-    .string({
-      required_error: "CPF is a required field.",
-    })
-    .length(14, "CPF must be exactly 11 digits."),
+  phone: yup
+    .string()
+    .required("Telefone é um campo obrigatório.")
+    .transform((value) => value.replace(/[^\d]/g, ""))
+    .matches(/^\d{11}$/, "O telefone deve ser um número válido de 11 dígitos."),
 
-  name: zod
-    .string({
-      required_error: "Name is a required field.",
-    })
-    .min(3, "Name must have at least 3 characters."),
-
-  phone: zod
-    .string({
-      required_error: "Phone is a required field.",
-    })
-    .regex(/^\(\d{2}\) \d{5}-\d{4}$/, "Phone must be a valid 11 digit number."),
-
-  numberOfCard: zod
-    .string({
-      required_error: "Card number is a required field.",
-      invalid_type_error: "Card number must be a valid 16-digit number.",
-    })
-    .regex(
-      /^\d{4} \d{4} \d{4} \d{4}$/,
-      "Card number must be in the format #### #### #### ####."
+  card_number: yup
+    .string()
+    .required("Número do cartão é um campo obrigatório.")
+    .transform((value) => value.replace(/\s+/g, ""))
+    .matches(
+      /^\d{16}$/,
+      "O Número do cartão deve ser um número válido de 16 dígitos."
     ),
 
-  optionOfPayment: zod
-    .string({
-      required_error: "Payment option is a required field.",
-    })
-    .min(1, "Payment option cannot be empty."),
+  option_payment: yup
+    .string()
+    .required("Opção de pagamento é um campo obrigatório.")
+    .min(1, "A opção de pagamento não pode estar vazia."),
 
-  monthOfExperience: zod
-    .number({
-      required_error: "Months of experience is a required field.",
-      invalid_type_error: "Months of experience must be a number.",
-    })
-    .min(1, "Months of experience must be at least 1.")
-    .max(12, "Months of experience cannot exceed 12."),
+  co2: yup
+    .number()
+    .required("A quantidade é obrigatória")
+    .positive("A quantidade deve ser maior que 0")
+    .min(1, "A quantidade deve ser maior que 0")
+    .typeError("A quantidade deve ser um número válido"),
 
-  yearsOfExperience: zod
-    .number({
-      required_error: "Years of experience is a required field.",
-      invalid_type_error: "Years of experience must be a number.",
-    })
-    .min(0, "Years of experience must be at least 0.")
-    .max(50, "Years of experience cannot exceed 50."),
+  cred: yup
+    .string()
+    .required("Opção de parcelamento é um campo obrigatório.")
+    .min(1, "A opção de parcelamento não pode estar vazia."),
+
+  expiration_month: yup
+    .number()
+    .required("Mês é um campo obrigatório.")
+    .typeError("Mês deve ser um número.")
+    .min(1, "Mês deve ser no mínimo 1.")
+    .max(12, "Mês não pode exceder 12."),
+
+  expiration_year: yup
+    .number()
+    .required("Ano é um campo obrigatório.")
+    .typeError("Ano deve ser um número.")
+    .min(0, "Ano deve ser no mínimo 0.")
+    .max(50, "Ano não pode exceder 50."),
 });

@@ -1,13 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
 import "../styles/globals.css";
-
-const roboto = Roboto({
-  subsets: ['latin'],
-  display: "swap",
-  variable: "--font-roboto",
-  weight: "400"
-});
 
 export const metadata: Metadata = {
   title: "Checkout Carbon",
@@ -24,11 +16,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo.svg" sizes="any" />
       </head>
-      <body
-        className={`${roboto.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

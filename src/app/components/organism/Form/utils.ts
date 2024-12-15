@@ -1,4 +1,6 @@
 import { optionDefault } from "@/app/utils/types";
+import { handleFormateCreditPriceProps } from "./@types";
+import { formatter } from "@/app/utils/utils";
 
 export const paymentOptions: optionDefault[] = [
   {
@@ -50,3 +52,45 @@ export const paymentOptions: optionDefault[] = [
     value: "12",
   },
 ];
+
+export const handleFormateCreditPrice = ({
+  list,
+}: handleFormateCreditPriceProps) => {
+  const newList = list
+    .filter((item) => item.amout)
+    .map((item) => ({
+      ...item,
+      value: item.id,
+      label: `Compensação - ${formatter({
+        type: "pt-BR",
+        currency: "BRL",
+        style: "currency",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }).format(item.amout || 0)}`,
+    }));
+  return newList;
+};
+
+export const generateInstallmentOptions = ({
+  co2,
+  cred,
+  maxInstallments = 12,
+}: {
+  co2: number;
+  cred: number;
+  maxInstallments?: number;
+}) => {
+  const total = cred * co2;
+  const options: optionDefault[] = [];
+
+  for (let i = 1; i <= maxInstallments; i++) {
+    const installmentValue = (total / i).toFixed(2).replace(".", ",");
+    options.push({
+      label: `${i}x de R$ ${installmentValue}`,
+      value: `${i}`,
+    });
+  }
+
+  return options;
+};

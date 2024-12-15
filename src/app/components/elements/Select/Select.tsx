@@ -1,15 +1,15 @@
 import { Text } from "../Text";
-import { FormSelectProps } from "@/app/utils/types";
+import { Props } from "./@types";
 
 export const Select = ({
-  name,
   label,
   error,
   options,
-  register,
   className,
+  helperText,
   defaultOption,
-}: FormSelectProps) => (
+  ...res
+}: Props) => (
   <>
     <label className={`form-control w-full ${className}`}>
       {label && (
@@ -18,18 +18,27 @@ export const Select = ({
         </div>
       )}
       <select
-        {...register(name)}
+        {...res}
         className="min-h-[41px] rounded-3xl bg-input select select-bordered w-full text-span text-[1.6rem] hover:bg-transparent"
       >
         {defaultOption && (
-          <option className="text-span text-[1.6rem]" value="" defaultValue={defaultOption} disabled>
+          <option
+            value=""
+            className="!text-buttonText text-[1.6rem]"
+            defaultValue={defaultOption}
+            disabled
+          >
             {defaultOption}
           </option>
         )}
         {options && (
           <>
             {options.map((option) => (
-              <option className="text-span text-[1.6rem]" value={option.value} key={option.value}>
+              <option
+                className="text-span text-[1.6rem]"
+                value={option.amout || option.value}
+                key={option.value}
+              >
                 {option.label}
               </option>
             ))}
@@ -38,8 +47,8 @@ export const Select = ({
       </select>
 
       {error && (
-        <div className="label">
-          <span className="label-text-alt text-error">{error.message}</span>
+        <div className={`error-message ${helperText ? "active" : ""}`}>
+          <span className="text-[1.4rem] text-error">{helperText}</span>
         </div>
       )}
     </label>

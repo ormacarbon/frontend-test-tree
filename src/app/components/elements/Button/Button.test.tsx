@@ -5,8 +5,10 @@ import { Button } from "@/app/components/elements";
 
 describe("Button component", () => {
   const mockProps = {
+    loading: false,
     text: "Click me!",
     onClick: jest.fn(),
+    className: "loading loading-spinner",
   };
   test("should render without crashing", () => {
     render(<Button>{mockProps.text}</Button>);
@@ -35,4 +37,15 @@ describe("Button component", () => {
     });
   });
 
+  it("renders loading spinner when loading is true", () => {
+    render(<Button loading className={mockProps.className} />);
+    expect(screen.getByRole("button")).toHaveClass("loading");
+    expect(screen.getByRole("button")).toHaveClass("loading-spinner");
+  });
+
+  it("does not render loading spinner when loading is false", () => {
+    render(<Button {...mockProps} className="" />);
+    expect(screen.queryByRole("button")).not.toHaveClass("loading");
+    expect(screen.queryByRole("button")).not.toHaveClass("loading-spinner");
+  });
 });

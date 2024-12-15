@@ -1,196 +1,230 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
 
+import { FormProps } from "./@types";
+import { getAllCreditPrice } from "./services";
+import { handleFormateCreditPrice } from "./utils";
+import { emptyDatacredOptions } from "@/app/utils/emptys";
+import { useAxiosRequest } from "@/app/hooks/axiosAdapter";
+import { creditPriceData, optionDefault } from "@/app/utils/types";
 import { Input, Text, Button, Select } from "@/app/components/elements";
-import { FormData, ValidFieldNames } from "@/app/utils/types";
-import { paymentOptions } from "./utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { schema } from "./schema";
+import { useInstallmentOptions } from "@/app/hooks/useInstallmentOptions";
+import { maskCard, maskCpf, maskPhone } from "@/app/utils/utils";
 
-export const Form = () => {
-  const [loading, setLoading] = useState(false);
+export const Form = ({
+  errors,
+  values,
+  loading,
+  touched,
+  resetForm,
+  setNotFlip,
+  handleChange,
+  handleSubmit,
+}: FormProps) => {
+  const { response, request } = useAxiosRequest<creditPriceData[]>();
+  const [credOptions, setCredOptions] =
+    useState<optionDefault[]>(emptyDatacredOptions);
 
-  const {
-    reset,
-    watch,
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-    mode: "onChange",
+  const installmentOptions = useInstallmentOptions({
+    price: values.cred,
+    quantity: values.co2,
   });
 
-  const isAnyFieldFilled = Object.values(watch()).some(
-    (value) => value !== undefined && value !== null && value !== ""
-  );
-
-  const onSubmit = async (data: FormData) => {
-    setLoading((prev) => !prev);
-    const timeoutId = setTimeout(() => {
-      setLoading((prev) => !prev);
-
-      const fieldErrorMapping: Record<string, ValidFieldNames> = {
-        name: "name",
-        cvv: "cvv",
-        cpf: "cpf",
-        phone: "phone",
-        email: "email",
-        numberOfCard: "numberOfCard",
-        optionOfPayment: "optionOfPayment",
-        monthOfExperience: "monthOfExperience",
-        yearsOfExperience: "yearsOfExperience",
-      };
-
-      console.log("fieldErrorMapping ::", fieldErrorMapping);
-      console.log("SUCCESS ::", data);
-    }, 2000);
-
-    return () => clearTimeout(timeoutId);
+  const fetchPageData = async () => {
+    await getAllCreditPrice({
+      request,
+    });
   };
+
+  useEffect(() => {
+    fetchPageData();
+  }, []);
+
+  useEffect(() => {
+    const options = handleFormateCreditPrice({ list: response?.body || [] });
+    setCredOptions(options);
+  }, [response]);
+
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-full max-w-[572px] flex flex-col gap-4"
+      onSubmit={handleSubmit}
+      className="w-full max-w-[572px] h-full grid gap-4 grid_form px-[1.5rem] lg:px-0"
     >
-      <div className="flex flex-col">
+      <div className="w-full col-span-2">
         <Input
-          type="text"
-          name="name"
           label="Nome"
-          register={register}
-          error={errors.name}
-          placeholder="Type here..."
+          type={"text"}
+          name={"name"}
+          maxLength={40}
+          value={values.name}
+          onChange={handleChange}
+          helperText={errors.name}
+          placeholder={"Digite aqui..."}
+          error={touched.name && Boolean(errors.name)}
+        />
+      </div>
+      <div className="row-start-2 h-auto">
+        <Input
+          type={"text"}
+          name={"phone"}
+          maxLength={15}
+          label="Telefone"
+          onChange={handleChange}
+          helperText={errors.phone}
+          placeholder={"Digite aqui..."}
+          value={maskPhone(values.phone)}
+          error={touched.phone && Boolean(errors.phone)}
+        />
+      </div>
+      <div className="row-start-2">
+        <Input
+          label="CPF"
+          name={"cpf"}
+          type={"text"}
+          maxLength={14}
+          onChange={handleChange}
+          helperText={errors.cpf}
+          value={maskCpf(values.cpf)}
+          placeholder={"Digite aqui..."}
+          error={touched.cpf && Boolean(errors.cpf)}
         />
       </div>
 
-      <div className="flex flex-wrap gap-4">
-        <div className="flex-1 min-w-[200px]">
-          <Input
-            type="string"
-            name="phone"
-            maxLength={15}
-            label="Telefone"
-            register={register}
-            error={errors.phone}
-            mask={"(##) #####-####"}
-            placeholder="Type here..."
-          />
-        </div>
-        <div className="flex-1 min-w-[200px]">
-          <Input
-            name="cpf"
-            label="CPF"
-            type="string"
-            maxLength={14}
-            error={errors.cpf}
-            register={register}
-            mask={"###.###.###-##"}
-            placeholder="Type here..."
-          />
-        </div>
-      </div>
-
-      <div className="flex flex-col">
+      <div className="col-span-2">
         <Input
-          type="email"
-          name="email"
+          type={"email"}
+          name={"email"}
           label="E-mail"
-          maxLength={255}
-          register={register}
-          error={errors.email}
-          placeholder="Type here..."
+          value={values.email}
+          onChange={handleChange}
+          helperText={errors.email}
+          placeholder={"Digite aqui..."}
+          error={touched.email && Boolean(errors.email)}
         />
       </div>
-
-      <div className="flex flex-col">
+      <div className="col-span-2 row-start-4">
         <Input
-          type="string"
-          maxLength={18}
-          name="numberOfCard"
-          register={register}
+          type={"text"}
+          maxLength={19}
+          name={"card_number"}
+          onChange={handleChange}
           label="Numero de Cartão"
-          placeholder="Type here..."
-          error={errors.numberOfCard}
-          mask={"#### #### #### ####"}
+          placeholder={"Digite aqui..."}
+          helperText={errors.card_number}
+          value={maskCard(values.card_number)}
+          error={touched.card_number && Boolean(errors.card_number)}
         />
       </div>
-
-      <div className="flex gap-4">
-        <div className="flex-1 min-w-[120px]">
-          <Input
-            type="number"
-            maxLength={2}
-            valueAsNumber
-            placeholder="MM"
-            register={register}
-            name="monthOfExperience"
-            className="input-secondary"
-            error={errors.monthOfExperience}
-          />
+      <div className="row-start-5">
+        <div className="label relative">
+          <Text>Data de Validade</Text>
         </div>
-        <div className="flex-1 min-w-[120px]">
+        <div className="flex items-start gap-3">
           <Input
-            type="number"
             maxLength={2}
-            valueAsNumber
-            placeholder="AA"
-            register={register}
-            name="yearsOfExperience"
+            type={"text"}
+            placeholder={"MM"}
+            onChange={handleChange}
             className="input-secondary"
-            error={errors.yearsOfExperience}
+            name={"expiration_month"}
+            value={values.expiration_month}
+            helperText={errors.expiration_month}
+            error={touched.expiration_month && Boolean(errors.expiration_month)}
           />
-        </div>
-        <div className="flex-1 min-w-[120px]">
+          <div className="text-[2.7rem] font-medium">/</div>
           <Input
-            name="cvv"
-            valueAsNumber
-            type="number"
-            maxLength={3}
-            label="CVC/CVV"
-            placeholder="Type here..."
-            register={register}
-            error={errors.cvv}
+            type={"text"}
+            maxLength={2}
+            placeholder={"AA"}
+            onChange={handleChange}
+            name={"expiration_year"}
+            className="input-secondary"
+            value={values.expiration_year}
+            helperText={errors.expiration_year}
+            error={touched.expiration_year && Boolean(errors.expiration_year)}
           />
         </div>
       </div>
-
-      <div className="flex flex-col">
+      <div className="row-start-5">
+        <Input
+          name={"security_code"}
+          type={"text"}
+          maxLength={3}
+          label="CVC/CVV"
+          value={values.security_code}
+          placeholder={"000"}
+          onChange={handleChange}
+          helperText={errors.security_code}
+          onBlur={() => setNotFlip(true)}
+          onFocus={() => setNotFlip(false)}
+          error={touched.security_code && Boolean(errors.security_code)}
+        />
+      </div>
+      <div className="row-start-6">
         <Select
-          register={register}
-          name="optionOfPayment"
-          options={paymentOptions}
+          name="cred"
+          value={values.cred}
+          options={credOptions}
+          onChange={handleChange}
+          helperText={errors.cred}
           defaultOption="Selecionar"
-          error={errors.optionOfPayment}
-          label="Opções de Parcelamento"
+          label="Opções de Compra"
+          error={touched.cred && Boolean(errors.cred)}
         />
       </div>
-
-      <div className="flex justify-center gap-10">
-        <Button
-          type="button"
-          loading={loading}
-          onClick={() => reset()}
-          disabled={loading || !isAnyFieldFilled}
-          className={`bg-transparent btn-voltar min-w-[19.7rem] min-h-[36px] border-border hover:bg-button hover:border-button group`}
-        >
-          <Text className="text-current group-hover:text-background">
-            Voltar
-          </Text>
-        </Button>
-        <Button
-          type="submit"
-          loading={loading}
-          disabled={loading || !isValid}
-          className={`btn min-w-[19.7rem] min-h-[36px] text-background border-none`}
-        >
-          <Text className="text-current group-hover:text-background">
-            Prosseguir
-          </Text>
-        </Button>
+      <div className="row-start-6">
+        <Input
+          name={"co2"}
+          type={"text"}
+          maxLength={3}
+          label="Quantidade"
+          value={values.co2}
+          onChange={handleChange}
+          helperText={errors.co2}
+          placeholder={"Digite aqui..."}
+          error={touched.co2 && Boolean(errors.co2)}
+        />
+      </div>
+       <div className="col-span-2 row-start-7">
+        <Select
+          name="option_payment"
+          onChange={handleChange}
+          defaultOption="Selecionar"
+          options={installmentOptions}
+          value={values.option_payment}
+          label="Opções de Parcelamento"
+          helperText={errors.option_payment}
+          disabled={!values.cred && !values.co2}
+          error={touched.option_payment && Boolean(errors.option_payment)}
+        />
+      </div>
+      <div className="col-span-2 row-start-8 place-content-center place-items-end">
+        <div className="flex justify-end flex-wrap items-center gap-x-10 gap-y-3 w-full">
+          <Button
+            type="button"
+            loading={loading}
+            disabled={loading}
+            onClick={() => resetForm()}
+            className={`bg-transparent w-full btn-voltar min-h-[36px] border-border hover:bg-button hover:border-button group sm:max-w-[19.7rem]`}
+          >
+            <Text className="text-current group-hover:text-background">
+              Voltar
+            </Text>
+          </Button>
+          <Button
+            type="submit"
+            loading={loading}
+            disabled={loading}
+            className={`btn bg-button w-full min-h-[36px] text-background border-none sm:max-w-[19.7rem] `}
+          >
+            <Text className="text-current group-hover:text-background">
+              Prosseguir
+            </Text>
+          </Button>
+        </div>
       </div>
     </form>
   );

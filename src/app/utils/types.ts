@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FieldError, UseFormRegister } from "react-hook-form";
+
+import { icons } from "../assets/icons";
 
 export type httpRequest = {
   body: any;
@@ -8,9 +9,35 @@ export type httpRequest = {
   method: "get" | "post" | "put" | "delete";
 };
 
+export type dataMessage = {
+  icon: string;
+  title: string;
+  show: boolean;
+  status: string;
+  subTitle: string;
+  message: string[];
+  loading?: boolean;
+  textButton: string;
+};
+
+export interface messageConfig {
+  icon: string;
+  title: string;
+  message: string[];
+  status: string;
+  subTitle: string;
+  textButton: string;
+}
+
 export type optionDefault = {
+  alt?: string;
   label: string;
-  value: string;
+  flag?: string;
+  icon?: string;
+  amout?: number;
+  createdAt?: string;
+  updatedAt?: string;
+  value: string | number;
 };
 
 export type useAxiosRequestProps = {
@@ -22,48 +49,54 @@ export type httpClientResponse<T = any> = {
   statusCode: number;
 };
 
+export type formatterProps = {
+  type?: string;
+  currency?: string;
+  minimumFractionDigits?: number;
+  maximumFractionDigits?: number;
+  style?: keyof Intl.NumberFormatOptionsStyleRegistry;
+};
+
 export type FormData = {
-  cvv: number;
+  security_code: number;
   cpf: string;
   name: string;
   phone: number;
   email: string;
-  numberOfCard: number;
-  optionOfPayment: string;
-  monthOfExperience: number;
-  yearsOfExperience: number;
+  card_number: number;
+  option_payment: string;
+  expiration_month: number;
+  expiration_year: number;
 };
 
-export type FormFieldProps = {
-  mask?: string;
-  type: string;
-  label?: string;
-  maxLength?: number;
-  className?: string;
-  placeholder: string;
-  name: ValidFieldNames;
-  valueAsNumber?: boolean;
-  error: FieldError | undefined;
-  register: UseFormRegister<FormData>;
+export type BuyCarbonData = {
+  co2: number;
+  cred: number;
+  card_number: string;
+  expiration_month: number;
+  expiration_year: number;
+  security_code: string;
+  cardholder: {
+    name: string;
+    identification: {
+      type: string;
+      number: string;
+    };
+  };
 };
 
-export type FormSelectProps = {
-  label?: string;
-  className?: string;
-  name: ValidFieldNames;
-  defaultOption?: string;
-  options: optionDefault[];
-  error: FieldError | undefined;
-  register: UseFormRegister<FormData>;
+export type creditPriceData = {
+  id: string;
+  amout: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
-export type ValidFieldNames =
-  | "cvv"
-  | "cpf"
-  | "name"
-  | "phone"
-  | "email"
-  | "numberOfCard"
-  | "optionOfPayment"
-  | "monthOfExperience"
-  | "yearsOfExperience";
+export type processPaymentResponse = {
+  status: string;
+  message: string;
+};
+
+export type ProductsResponse = {
+  products: creditPriceData[];
+};
