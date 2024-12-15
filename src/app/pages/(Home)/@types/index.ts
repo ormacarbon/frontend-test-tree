@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-import { BuyCarbonData, httpClientResponse, httpRequest, processPaymentResponse } from "@/app/utils/types";
+import { BuyCarbonData, httpClientResponse, httpRequest } from "@/app/utils/types";
 
 export type processPaymentProps = {
   data: BuyCarbonData;

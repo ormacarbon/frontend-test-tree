@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { icons } from "../assets/icons";
-
 export type httpRequest = {
   body: any;
   url: string;

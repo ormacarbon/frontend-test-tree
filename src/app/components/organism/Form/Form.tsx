@@ -39,14 +39,13 @@ export const Form = ({
 
   useEffect(() => {
     fetchPageData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const options = handleFormateCreditPrice({ list: response?.body || [] });
     setCredOptions(options);
   }, [response]);
-
-  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   return (
     <form
