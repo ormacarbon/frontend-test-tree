@@ -4,7 +4,12 @@ const CardholderSchema = z.object({
   name: z.string().min(1, "O nome do titular do cartão é obrigatório."),
   identification: z.object({
     type: z.enum(["CPF"]),
-    number: z.string().regex(/^\d{11}$/, "O número deve conter 11 dígitos."),
+    number: z
+      .string()
+      .transform((val) => val.replace(/[^0-9]+/g, "")) // Remove caracteres não numéricos
+      .refine((val) => val.length === 11, {
+        message: "O número deve conter 11 dígitos.",
+      }),
   }),
 });
 
@@ -13,7 +18,11 @@ export const CheckoutSchema = z.object({
   cred: z.number().min(1, "O valor unitário do crédito deve ser no mínimo 1."),
   card_number: z
     .string()
-    .regex(/^\d{16}$/, "O número do cartão deve conter 16 dígitos."),
+    .transform((val) => val.replace(/[^0-9]+/g, "")) // Remove caracteres não numéricos
+    .refine((val) => val.length === 16, {
+      message: "O número do cartão deve conter 16 dígitos.",
+    }),
+
   expiration_month: z
     .string()
     .regex(/^\d+$/, "O mês de expiração deve ser um número.")
