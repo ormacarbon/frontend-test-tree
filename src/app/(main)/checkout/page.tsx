@@ -85,13 +85,13 @@ export default function Checkout() {
               <div className="flex flex-row items-center gap-2">
                 <BasicInput
                   {...register("expiration_month")}
-                  className="lgmax-w-[85px] max-w-[55px]"
+                  className=" max-w-[55px] lg:max-w-[85px]"
                   placeholder="MM"
                 />
                 <span className="text-primary-500 font-bold text-4xl">/</span>
                 <BasicInput
                   {...register("expiration_year")}
-                  className="lgmax-w-[85px] max-w-[55px]"
+                  className=" max-w-[55px] lg:max-w-[85px]"
                   placeholder="AA"
                 />
               </div>
