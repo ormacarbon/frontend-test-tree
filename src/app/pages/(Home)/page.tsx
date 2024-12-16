@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { useFormik } from "formik";
+import { useEffect, useState } from "react";
 
-import { initialValues, messagesConfig } from "./utils";
+import { generateDataMessage, initialValues, messagesConfig } from "./utils";
 import { icons } from "@/app/assets/icons";
 import { processPayment } from "./services";
 import { formatter } from "@/app/utils/utils";
@@ -19,7 +19,7 @@ import { BuyCarbonData, dataMessage, messageConfig } from "@/app/utils/types";
 export default function Home() {
   const [notFlip, setNotFlip] = useState(true);
   const [loading, setLoading] = useState(false);
-  const { response, request } = useAxiosRequest<BuyCarbonData>();
+  const { response, request, error } = useAxiosRequest<BuyCarbonData>();
   const [dataMessage, setDataMessage] = useState<dataMessage>(emptyDataMessage);
 
   const formik = useFormik({
@@ -62,22 +62,21 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (response?.statusCode) {
-      const config = messagesConfig[
-        response.statusCode as keyof typeof messagesConfig
-      ] as messageConfig;
-      setDataMessage({
-        show: true,
-        loading: false,
-        icon: config.icon || "",
-        title: config.title,
-        message: config.message,
-        status: config.status,
-        subTitle: config.subTitle,
-        textButton: config.textButton,
-      });
+    if (error.status) {
+      const errorConfig =
+        messagesConfig[error.status as keyof typeof messagesConfig];
+
+      const updatedErrorConfig = {
+        ...errorConfig,
+        message: [error.message],
+      };
+      setDataMessage(generateDataMessage(updatedErrorConfig as messageConfig));
+    } else if (response?.statusCode) {
+      const responseConfig =
+        messagesConfig[response.statusCode as keyof typeof messagesConfig];
+      setDataMessage(generateDataMessage(responseConfig as messageConfig));
     }
-  }, [response]);
+  }, [response, error]);
 
   return (
     <Layout>

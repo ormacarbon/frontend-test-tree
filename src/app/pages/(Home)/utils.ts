@@ -1,5 +1,5 @@
 import { icons } from "@/app/assets/icons";
-import { messageConfig } from "@/app/utils/types";
+import { dataMessage, messageConfig } from "@/app/utils/types";
 import { createMessageConfig } from "@/app/utils/utils";
 
 export const initialValues = {
@@ -46,8 +46,18 @@ const defaultErrorConfig:messageConfig = {
   message: ["Mensagem de erro decorrente da resposta do cartão"],
 };
 
-// Gerando as configurações de mensagem para sucesso e erro
 export const messagesConfig = {
   ...createMessageConfig(statusConfig.success, defaultSuccessConfig),
   ...createMessageConfig(statusConfig.error, defaultErrorConfig),
 };
+
+export const generateDataMessage = (config?: messageConfig): dataMessage => ({
+  show: true,
+  loading: false,
+  icon: config?.icon || "",
+  subTitle: config?.subTitle || "",
+  status: config?.status || "error",
+  title: config?.title || "Erro Desconhecido",
+  textButton: config?.textButton || "Tentar novamente",
+  message: config?.message || ["Ocorreu um erro inesperado. Tente novamente."],
+});

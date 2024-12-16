@@ -1,9 +1,10 @@
-import { ENDPOINTS } from "@/app/utils/endpoints";
-import { httpRequest } from "@/app/utils/types";
 import { AxiosError } from "axios";
-import { processPaymentProps } from "./@types";
 
-export const processPayment  = async ({
+import { processPaymentProps } from "./@types";
+import { httpRequest } from "@/app/utils/types";
+import { ENDPOINTS } from "@/app/utils/endpoints";
+
+export const processPayment = async ({
   data,
   request,
   setLoading,
@@ -16,16 +17,14 @@ export const processPayment  = async ({
     headers: { "Content-Type": "application/json" },
     body: data,
   };
-  
+
   try {
     await request(requestConfig);
   } catch (error) {
-    console.error("error ::", error);
     const _error = error as AxiosError<{ message: string }>;
     const errorMessage =
       _error.response?.data?.message || "An unexpected error occurred";
-
-    console.log("errorMessage ::", errorMessage);
+    throw new Error(errorMessage);
   } finally {
     setLoading(false);
   }
