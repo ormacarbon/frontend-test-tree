@@ -87,64 +87,63 @@ yarn dev
 
 ### Estrutura do projeto
 
-   src/
-   │
-   ├── app/
-   │   ├── assets/
-   │   │   ├── fonts/
-   │   │   │   └── index.ts
-   │   │   ├── icons/
-   │   │   │   ├── chip.svg
-   │   │   │   ├── logo.svg
-   │   │   │   ├── plant.svg
-   │   │   │   ├── placeholder.png
-   │   │   │   ├── error_card_buy.svg
-   │   │   │   ├── circular_spinner.png
-   │   │   │   ├── success_card_buy.svg
-   │   │   │   ├── summary_buy_logo.svg
-   │   │   │   └── index.ts
-   │   │   ├── images/
-   │   │   │   ├── import-png.d.ts
-   │   │   │   ├── import-svg.d.ts
-   │   │   │   ├── placeholder.png
-   │   │   │   ├── bg_credit_card.svg
-   │   │   │   ├── image_not_found.png.png
-   │   │   │   └── index.ts
-   │   ├── components/
-   │   │   ├── elements/
-   │   │   │   ├── Text
-   │   │   │   ├── Load
-   │   │   │   ├── Input
-   │   │   │   ├── Title
-   │   │   │   ├── Button
-   │   │   │   ├── Select
-   │   │   │   └── index.ts
-   │   │   ├── modules/
-   │   │   │   ├── Header/
-   │   │   │   ├── Message/
-   │   │   │   └── index.ts
-   │   │   ├── organism/
-   │   │   │   ├── Form/
-   │   │   │   ├── Layout/
-   │   │   │   ├── CreditCard/
-   │   │   │   └── index.ts
-   │   ├── context/
-   │   │   └── formContext.tsx
-   │   ├── hooks/
-   │   │   ├── useInstallmentOptions.ts
-   │   │   └── axiosAdapter.ts
-   │   ├── pages/
-   │   │   ├── (Home)/
-   │   │   └── layout.tsx
-   │   ├── state/
-   │   │   └── provider.tsx
-   │   ├── styles/
-   │   │   └── globals.css
-   │   ├── utils/
-   │   │   ├── utils.ts
-   │   │   ├── types.ts
-   │   │   ├── emptys.ts
-   │   │   └── endpoints.ts
+    ├── src/
+    │   ├── app/
+    │   │   ├── assets/
+    │   │   │   ├── fonts/
+    │   │   │   │   └── index.ts
+    │   │   │   ├── icons/
+    │   │   │   │   ├── chip.svg
+    │   │   │   │   ├── logo.svg
+    │   │   │   │   ├── plant.svg
+    │   │   │   │   ├── placeholder.png
+    │   │   │   │   ├── error_card_buy.svg
+    │   │   │   │   ├── circular_spinner.png
+    │   │   │   │   ├── success_card_buy.svg
+    │   │   │   │   ├── summary_buy_logo.svg
+    │   │   │   │   └── index.ts
+    │   │   │   ├── images/
+    │   │   │   │   ├── import-png.d.ts
+    │   │   │   │   ├── import-svg.d.ts
+    │   │   │   │   ├── placeholder.png
+    │   │   │   │   ├── bg_credit_card.svg
+    │   │   │   │   ├── image_not_found.png.png
+    │   │   │   │   └── index.ts
+    │   │   ├── components/
+    │   │   │   ├── elements/
+    │   │   │   │   ├── Text
+    │   │   │   │   ├── Load
+    │   │   │   │   ├── Input
+    │   │   │   │   ├── Title
+    │   │   │   │   ├── Button
+    │   │   │   │   ├── Select
+    │   │   │   │   └── index.ts
+    │   │   │   ├── modules/
+    │   │   │   │   ├── Header/
+    │   │   │   │   ├── Message/
+    │   │   │   │   └── index.ts
+    │   │   │   ├── organism/
+    │   │   │   │   ├── Form/
+    │   │   │   │   ├── Layout/
+    │   │   │   │   ├── CreditCard/
+    │   │   │   │   └── index.ts
+    │   │   ├── context/
+    │   │   │   └── formContext.tsx
+    │   │   ├── hooks/
+    │   │   │   ├── useInstallmentOptions.ts
+    │   │   │   └── axiosAdapter.ts
+    │   │   ├── pages/
+    │   │   │   ├── (Home)/
+    │   │   │   └── layout.tsx
+    │   │   ├── state/
+    │   │   │   └── provider.tsx
+    │   │   ├── styles/
+    │   │   │   └── globals.css
+    │   │   ├── utils/
+    │   │   │   ├── utils.ts
+    │   │   │   ├── types.ts
+    │   │   │   ├── emptys.ts
+    │   │   │   └── endpoints.ts
 
 - O diretório `src/app/` contém todos os componentes do projeto, organizados de acordo com o padrão atomic.
   Cada componente é classificado como `átomo (atom)`, `molécula (molecule)` ou `organismo (organism)`, conforme
