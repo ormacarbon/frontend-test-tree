@@ -25,7 +25,7 @@ export default {
   			'200': '#F4F4F4',
   			'300': '#F3F1F1',
   			'400': '#F1F0F0',
-        '600': '#C4C4C4',
+        	'600': '#C4C4C4',
   			'700': '#B0B0B0',
   			'800': '#979797'
   		}
@@ -45,6 +45,15 @@ export default {
         'custom-shadow-up': '8px 4px 32px 0 rgba(0, 0, 0, 0.15)',
         'custom-shadow-down': '0px 4px 4px 0 rgba(0, 0, 0, 0.15)',
 
+      },
+	  keyframes: {
+        spinReverse: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(-360deg)" },
+        },
+      },
+      animation: {
+        spinReverse: "spinReverse 1.5s linear infinite",
       },
   		colors: {
   			background: 'hsl(var(--background))',

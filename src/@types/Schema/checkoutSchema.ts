@@ -41,6 +41,8 @@ export const CheckoutSchema = z.object({
     .string()
     .regex(/^\d{3}$/, "O código de segurança deve conter 3 dígitos."),
   cardholder: CardholderSchema,
+  email: z.string().email(),
+
   paymentInstallments: z.string(),
 });
 

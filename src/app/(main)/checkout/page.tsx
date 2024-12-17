@@ -1,146 +1,78 @@
-"use client";
-import { BasicInput } from "@/components/BasicInput";
+import { CheckoutForm } from "@/components/CheckoutForm";
 import { Header } from "@/components/Header";
-import { Controller, useForm } from "react-hook-form";
-import {
-  CheckoutSchema,
-  CheckoutSchemaType,
-} from "@/@types/Schema/checkoutSchema";
-import { useSearchParams } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/Button";
-import { BasicSelect } from "@/components/BasicSelect";
-import { selectInstallments } from "@/utils/selectInstalment";
-import { MaskedInput } from "@/components/MaskedInput";
-export default function Checkout() {
-  const searchParams = useSearchParams();
+import { log } from "console";
+import Image from "next/image";
+interface CheckoutProps {
+  searchParams: { [key: string]: string | string[] };
+}
 
-  const co2 = Number(searchParams.get("co2")) || 1;
-  const cred = Number(searchParams.get("cred")) || 2;
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors, isValid },
-    reset,
-    setError,
-    clearErrors,
-    watch,
-  } = useForm<CheckoutSchemaType>({
-    defaultValues: {
-      cardholder: { identification: { type: "CPF" }, name: "" },
-      co2: co2,
-      cred: cred,
-    },
-    mode: "onChange",
-    criteriaMode: "all",
-    resolver: zodResolver(CheckoutSchema),
-  });
+async function fetchCreditPrice(id: number) {
+  const response = await fetch(
+    `https://6751f822d1983b9597b4fa68.mockapi.io/api/credit-price/${id}`,
+    { cache: "no-store" }
+  );
 
-  const onSubmit = (formData: CheckoutSchemaType) => {
-    console.log("formData", formData);
-  };
+  if (!response.ok) {
+    throw new Error("Failed to fetch credit price");
+  }
+
+  return response.json();
+}
+
+export default async function Checkout({ searchParams }: CheckoutProps) {
+  const co2 = await searchParams.co2;
+  const cred = await searchParams.cred;
+
+  const creditPrice: {
+    createdAt: Date;
+    updatedAt: Date;
+    amout: number;
+    id: string;
+  } = await fetchCreditPrice(Number(cred));
+  console.log("creditPrice", creditPrice);
+
+  const price = creditPrice.amout * Number(co2);
 
   return (
-    <div className=" py-12 flex flex-col items-center max-w-[572px] w-full gap-6">
-      <Header />
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col w-full gap-12"
-      >
-        <div className="flex flex-col w-full gap-3">
-          <BasicInput
-            {...register("cardholder.name")}
-            label="Nome"
-            placeholder="Nome"
+    <main className="flex flex-col lg:flex-row">
+      <section className="flex-2 w-full pt-[0.75rem] mt-[4rem] px-[31px] flex justify-center pb-[12rem]">
+        <div className=" py-12 flex flex-col items-center max-w-[572px] w-full gap-6">
+          <Header />
+          <CheckoutForm price={price} />
+        </div>
+      </section>
+      <section className="flex-1 w-full bottom-0 fixed lg:relative lg:min-w-[40rem] flex flex-col justify-center lg:items-center gap-[70px] lg:border-l-2 lg:border-l-gray-400 bg-white z-20 ">
+        <div className="relative hidden lg:flex min-h-[214px] max-w-[351px] w-full h-auto">
+          <Image
+            src={"/credit-card-front.svg"}
+            alt="credit card front image"
+            fill
           />
-          <div className="flex flex-row justify-between">
-            <MaskedInput
-              mask="(__) _ ____.____"
-              label="Telefone"
-              className="max-w-[155px] lg:max-w-[300px]"
-              placeholder="(99) 9 9999-9999"
-              replacement={{ _: /\d/ }}
-            />
-            <MaskedInput
-              mask="___.___.___-__"
-              placeholder="000.000.000-00"
-              {...register("cardholder.identification.number")}
-              label="CPF"
-              replacement={{ _: /\d/ }}
-              className="max-w-[140px] lg:max-w-[230px]"
-            />
-          </div>
-          <BasicInput type="email" label="E-mail" placeholder="E-mail" />
-          <MaskedInput
-            mask="____ ____ ____ ____"
-            {...register("card_number")}
-            label="Número de Cartão"
-            replacement={{ _: /\d/ }}
-            placeholder="9999 9999 9999 9999"
-          />
-
-          <div className="flex flex-row justify-between">
-            <div className="flex flex-col">
-              <label className="text-primary-500 font-bold">
-                Data de Validade
-              </label>
-              <div className="flex flex-row items-center gap-2">
-                <MaskedInput
-                  mask="__"
-                  {...register("expiration_month")}
-                  className=" max-w-[55px] lg:max-w-[85px]"
-                  placeholder="MM"
-                  replacement={{ _: /\d/ }}
-                  maxLength={2}
-                  max={12}
-                />
-                <span className="text-primary-500 font-bold text-4xl">/</span>
-                <MaskedInput
-                  mask="__"
-                  {...register("expiration_year")}
-                  className=" max-w-[55px] lg:max-w-[85px]"
-                  placeholder="AA"
-                  replacement={{ _: /\d/ }}
-                  maxLength={2}
-                />
+        </div>
+        <div className="flex flex-col items-center">
+          <h3 className="text-primary-500 font-bold text-4xl font-condensed hidden lg:flex">
+            Resumo de compra
+          </h3>
+          <div className=" p-9 w-full lg:w-[450px] lg:relative rounded-t-[17px] lg:rounded-[17px]  flex flex-col justify-center items-center gap-3 z-20 shadow-custom-shadow-up lg:shadow-custom-shadow-down">
+            <h3 className="text-primary-500 font-bold text-2xl font-condensed lg:hidden">
+              Resumo de compra
+            </h3>
+            <div className="flex flex-row gap-[54px] items-center">
+              <div className=" relative flex min-h-[53px] lg:min-h-[82px] lg:max-h-[82px] aspect-square  max-w-[53px] lg:max-w-[82px] w-full h-auto">
+                <Image src={"/icon-summary.svg"} alt="summary image" fill />
+              </div>
+              <div className="max-w-[115px] lg:max-w-[175px]">
+                <p className="text-black font-extralight text-base lg:text-2xl font-condensed">
+                  Compensação de emissões
+                </p>
+                <span className="capitalize font-condensed font-bold text-base lg:text-2xl">
+                  R$: {price}
+                </span>
               </div>
             </div>
-            <MaskedInput
-              mask="___"
-              {...register("security_code")}
-              label="CVC/CVV"
-              className="max-w-[140px] lg:max-w-[230px]"
-              placeholder="999"
-              replacement={{ _: /\d/ }}
-              maxLength={3}
-            />
           </div>
-          <Controller
-            name="paymentInstallments"
-            control={control}
-            render={({ field }) => (
-              <BasicSelect
-                label="Opções de Parcelamento"
-                selectContent={selectInstallments(300, 12)}
-                value={field.value}
-                onChange={field.onChange}
-              />
-            )}
-          />
         </div>
-
-        <div className="flex flex-col-reverse lg:flex-row items-center font-bold lg:justify-end gap-[36px]">
-          <Button>Voltar</Button>
-          <Button
-            type="submit"
-            disabled={!isValid}
-            className="enabled:border-primary-500 text-white font-bold enabled:bg-primary-500 disabled:bg-gray-700"
-          >
-            Prosseguir
-          </Button>
-        </div>
-      </form>
-    </div>
+      </section>
+    </main>
   );
 }

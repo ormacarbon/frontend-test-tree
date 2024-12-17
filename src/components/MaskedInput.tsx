@@ -20,7 +20,7 @@ export const MaskedInput = forwardRef<HTMLInputElement, MaskedInputProps>(
           mask={mask} // Aplique a máscara diretamente no componente
           {...props} // Passe os outros props para o input
           ref={ref}
-          className="w-full bg-gray-200/60 px-3 py-2 rounded-[25px] border-none placeholder:text-gray-700 max-h-[30px] text-sm lg:max-h-[40px] lg:px-6 lg:py-3 lg:text-base"
+          className="w-full bg-gray-200/60 px-3 py-2 rounded-[25px] border-none placeholder:text-gray-700 max-h-[30px] text-sm lg:max-h-[40px] xl:px-6 lg:px-3 lg:py-3 xl:text-base"
           {...register} // Passe a função de registro do react-hook-form
         />
       </div>

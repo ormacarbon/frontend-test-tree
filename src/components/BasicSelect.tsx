@@ -25,7 +25,7 @@ export const BasicSelect = forwardRef<HTMLDivElement, BasicSelectProps>(
         {label && <label className="text-primary-500 font-bold">{label}</label>}
 
         <Select value={value} onValueChange={onChange}>
-          <SelectTrigger className="w-full bg-gray-200/60 px-3 py-2 rounded-[25px] border-none placeholder:text-gray-700 max-h-[30px] text-sm lg:max-h-[40px] lg:px-6 lg:py-3 lg:text-base">
+          <SelectTrigger className="w-full bg-gray-200/60 px-3 py-2 rounded-[25px] border-none placeholder:text-gray-700 max-h-[30px] text-sm lg:max-h-[40px] xlg:px-6 lg:px-3 lg:py-3 xl:text-base">
             <SelectValue
               placeholder={placeholder}
               className="text-gray-700 placeholder:text-gray-700"
