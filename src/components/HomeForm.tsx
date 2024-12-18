@@ -68,7 +68,7 @@ export const HomeForm = () => {
             placeholder="2"
             register={register("cred")}
           />
-          <SwitchField<HomeFormType>
+          <SwitchField
             name="error"
             control={control}
             label=""

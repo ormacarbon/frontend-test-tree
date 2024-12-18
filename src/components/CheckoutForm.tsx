@@ -11,7 +11,7 @@ import { selectInstallments } from "@/utils/selectInstalment";
 import { MaskedInput } from "@/components/MaskedInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSearchParams } from "next/navigation";
-import { postPayment } from "@/app/service/api";
+import { postPayment } from "@/service/api";
 import { Loading } from "./Loading";
 import { useRouter } from "next/navigation";
 interface CheckoutForm {
@@ -44,6 +44,8 @@ export const CheckoutForm = ({ price }: CheckoutForm) => {
   async function onSubmit(formData: CheckoutSchemaType) {
     console.log("in form loading:", isSubmitting);
     const { paymentInstallments, email, ...data } = formData;
+    console.log("not used data:", paymentInstallments, email);
+    
     console.log("data:", data);
     await postPayment(data)
       .then((response) => {

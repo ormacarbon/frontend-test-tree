@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { FunctionComponent } from "react";
 export const Header: FunctionComponent = () => {
   return (

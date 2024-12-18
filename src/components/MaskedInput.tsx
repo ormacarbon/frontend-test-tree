@@ -1,4 +1,4 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { InputMask, InputMaskProps } from "@react-input/mask";
 

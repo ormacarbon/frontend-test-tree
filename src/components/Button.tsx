@@ -1,7 +1,6 @@
 import { ButtonHTMLAttributes, FunctionComponent } from "react";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
-export const Button: FunctionComponent<ButtonProps> = ({
+export const Button: FunctionComponent<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   className,
   ...props
 }) => {

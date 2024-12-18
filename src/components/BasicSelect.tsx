@@ -17,11 +17,11 @@ interface BasicSelectProps {
 
 export const BasicSelect = forwardRef<HTMLDivElement, BasicSelectProps>(
   (
-    { selectContent, label, placeholder = "Selecionar", value, onChange },
-    _ref
+    { selectContent, label, placeholder = "Selecionar", value, onChange }, ref
+    
   ) => {
     return (
-      <div className={`flex flex-col items-start gap-[6px] w-full`}>
+      <div className={`flex flex-col items-start gap-[6px] w-full`} ref={ref}>
         {label && <label className="text-primary-500 font-bold">{label}</label>}
 
         <Select value={value} onValueChange={onChange}>

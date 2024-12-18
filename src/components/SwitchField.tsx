@@ -1,14 +1,18 @@
 "use client";
 
 import { Switch } from "@/components/ui/switch"; // Ajuste o path conforme seu projeto
-import { useController, UseControllerProps } from "react-hook-form";
+import { useController, UseControllerProps, FieldValues } from "react-hook-form";
 
-interface SwitchFieldProps<T> extends UseControllerProps<T> {
+interface SwitchFieldProps<T extends FieldValues> extends UseControllerProps<T> {
   label?: string;
   description?: string;
 }
 
-export function SwitchField<T>({ label, description, ...controllerProps }: SwitchFieldProps<T>) {
+export function SwitchField<T extends FieldValues>({
+  label,
+  description,
+  ...controllerProps
+}: SwitchFieldProps<T>) {
   const {
     field: { value, onChange, ...rest },
   } = useController(controllerProps);

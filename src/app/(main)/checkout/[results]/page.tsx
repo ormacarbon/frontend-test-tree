@@ -1,61 +1,55 @@
 import { Button } from "@/components/Button";
 import { Header } from "@/components/Header";
-import { error } from "console";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
 type ResultadoProps = {
   result: string;
   data: { title: string; subTitle: string; content: string };
 };
+
 type Props = {
-  params: {
+  params: Promise<{
     results: string;
-    data: { title: string; subTitle: string; content: string };
-  };
+  }>;
 };
-export const generateMetadata = ({ params }: Props): Metadata => {
+
+
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const { results } = await params;
   return {
-    title: `Status: ${params.results}`,
+    title: `Status: ${results}`,
   };
 };
 
-const StatusPage = async ({ params }: Props) => {
-  const resultData = await getResultData(params.results);
+const ResultsPage = async ({ params }: Props) => {
+  const { results } = await params;
+  const resultData = await getResultData(results);
   const result = resultData?.result || "error";
   const data = resultData?.data;
   const contents = data?.content.split("\n\n");
-  console.log("data", data);
 
   return (
     <main className="flex-1 flex flex-col mx-auto max-w-[1080px] w-full py-10 gap-8 justify-center">
       <Header />
-      <div
-        className={
-          "flex w-full flex-col-reverse lg:flex-row justify-center lg:justify-between gap-8 items-center"
-        }
-      >
-        <section className="flex-1 flex-col flex justify-start items-center lg:items-start gap-4 lg:gap-9 lg:justify-normal w-full max-w-[28rem] py-[0.75rem] lg:mt-[4rem] px-[31px] ">
+      <div className="flex w-full flex-col-reverse lg:flex-row justify-center lg:justify-between gap-8 items-center">
+        <section className="flex-1 flex-col flex justify-start items-center lg:items-start gap-4 lg:gap-9 lg:justify-normal w-full max-w-[28rem] py-[0.75rem] lg:mt-[4rem] px-[31px]">
           <h3
-            className={`font-condensed text-primary-500 font-bold text-3xl lg:text-5xl text-center ${
-              result === "error" && "text-error"
-            } `}
+            className={`font-condensed  font-bold text-3xl lg:text-5xl text-center ${
+              result === "error"? "text-error": "text-primary-500"
+            }`}
           >
             {data?.title}
           </h3>
           <h4
-            className={`font-condensed text-primary-500 font-bold text-xl lg:text-3xl text-center lg:text-left ${
-              result === "error" && "text-error"
+            className={`font-condensed  font-bold text-xl lg:text-3xl text-center lg:text-left ${
+              result === "error"? "text-error": "text-primary-500"
             }`}
           >
             {data?.subTitle}
           </h4>
-
-          <div
-            className={
-              "flex flex-col gap-3 items-start lg:justify-start px-6 lg:px-0 max-w-[19rem] lg:max-w-none"
-            }
-          >
+          <div className="flex flex-col gap-3 items-start lg:justify-start px-6 lg:px-0 max-w-[19rem] lg:max-w-none">
             {contents?.map((content, index) => (
               <strong
                 key={index}
@@ -65,14 +59,18 @@ const StatusPage = async ({ params }: Props) => {
               </strong>
             ))}
           </div>
-          <div className=" w-full flex flex-row justify-center lg:justify-normal p-12 lg:p-0">
+          <div className="w-full flex flex-row justify-center lg:justify-normal p-12 lg:p-0">
             {result === "success" ? (
               <Button className="border-primary-500 text-white font-bold bg-primary-500 max-w-[285px]">
                 Compartilhar
               </Button>
             ) : (
-              <Link className="w-full max-w-[285px] flex justify-center" href="/" passHref>
-                <Button className=" w-full border-primary-500 text-white font-bold bg-primary-500 ">
+              <Link
+                className="p-0 m-0 w-full max-w-[285px] flex justify-center"
+                href="/"
+                passHref
+              >
+                <Button className="max-w-none w-full border-primary-500 text-white font-bold bg-primary-500">
                   Tentar novamente
                 </Button>
               </Link>
@@ -83,16 +81,12 @@ const StatusPage = async ({ params }: Props) => {
           <div className="bg-gray-300 p-12 lg:p-20 rounded-full">
             <div className="relative lg:flex min-w-[6rem] lg:min-w-[18rem] w-full aspect-square h-auto">
               {result === "success" && (
-                <Image
-                  src={"/icon-success.svg"}
-                  alt="credit card front image"
-                  fill
-                />
+                <Image src={"/icon-success.svg"} alt="success icon" fill />
               )}
               {result === "error" && (
                 <Image
                   src={"/icon-credit-card-error.svg"}
-                  alt="credit card front image"
+                  alt="error icon"
                   fill
                 />
               )}
@@ -129,4 +123,5 @@ export async function generateStaticParams() {
   // Aqui você define os parâmetros estáticos que deseja gerar
   return [{ results: "success" }, { results: "error" }];
 }
-export default StatusPage;
+
+export default ResultsPage;
