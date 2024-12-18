@@ -37,11 +37,11 @@ export default function Page() {
           Checkout Carbon
         </h1>
       </header>
-      <main className="flex flex-col md:flex-row md:gap-8 h-full mt-8">
-        <div className="flex flex-col w-full md:w-2/3 items-start justify-start">
+      <main className="flex flex-col md:flex-row md:gap-72 h-full mt-8">
+        <div className="flex flex-col w-full md:w-2/4 items-start justify-start">
           <MyForm total={amount} co2={co2} cred={cred} />
         </div>
-        <div className="md:w-1/3 hidden md:flex flex-col items-center justify-center gap-y-10">
+        <div className="md:w-2/4 hidden md:flex flex-col justify-center gap-y-10">
           <Image src="/CardIcon.svg" width={351} height={214} alt="Cartão" />
           <PurchaseResume amount={amount} />
         </div>
