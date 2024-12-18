@@ -40,8 +40,6 @@ const formSchema = z.object({
   name_opparcelamento: z.string().nonempty("Opção de parcelamento é obrigatória"),
 });
 
-
-
 interface MyFormProps {
   total?: number | null;
   co2: number;
@@ -60,6 +58,17 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      name_Nome: '',
+      name_telefone: '',
+      name_CPF: '',
+      name_email: '',
+      name_numerocartao: '',
+      name_mesvalidade: '',
+      name_anovalidade: '',
+      name_CVCCVV: '',
+      name_opparcelamento: '',
+    }
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -106,7 +115,6 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
       setIsLoading(false);
     }
   }
-
   return (
     <div className="relative">
       {/* Tela de carregamento */}
@@ -299,7 +307,7 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
           {/* Botões */}
           <div className="flex flex-col md:flex-row justify-end gap-4">
             <Button
-              className="text-base text-botaoProsseguir bg-white border-2 m-10 w-72"
+              className="text-base text-botaoProsseguir bg-white border-2 m-4 w-72"
               type="button"
               onClick={() => router.back()}
             >
@@ -307,7 +315,7 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
             </Button>
             <Button
               type="submit"
-              className="text-base text-white bg-botaoProsseguir m-10 w-72"
+              className="text-base text-white bg-botaoProsseguir m-4 w-72"
               disabled={isLoading}
             >
               {isLoading ? "Processando..." : "Prosseguir"}
