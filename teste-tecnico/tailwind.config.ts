@@ -8,21 +8,16 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-	screens: {
-		'sm': '576px',
-		// => @media (min-width: 576px) { ... }
-  
-		'md': '960px',
-		// => @media (min-width: 960px) { ... }
-  
-		'lg': '1440px',
-		// => @media (min-width: 1440px) { ... }
-	  },
+  	screens: {
+  		sm: '576px',
+  		md: '960px',
+  		lg: '1440px'
+  	},
   	extend: {
   		colors: {
-			primaria:'#00A19DF2',
-			fundo: 'hsla(0, 0%, 96%, 0.6)',
-			botaoProsseguir: '#B0B0B0',
+  			primaria: '#00A19DF2',
+  			fundo: 'hsla(0, 0%, 96%, 0.6)',
+  			botaoProsseguir: '#B0B0B0',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			primary: {
@@ -71,4 +66,5 @@ export default {
   		}
   	}
   },
+    plugins: [require("tailwindcss-animate")]
 } satisfies Config;
