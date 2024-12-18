@@ -16,16 +16,18 @@ export const HomeForm = () => {
     control,
     formState: { isSubmitting },
   } = useForm<HomeFormType>({
-    defaultValues: { co2: 1, cred: 2, error: false },
+    defaultValues: { error: false },
     resolver: zodResolver(HomeFormSchema),
   });
 
   const router = useRouter();
 
   const onSubmit = (formData: HomeFormType) => {
+    console.log("aqui");
+    
     const searchParams = new URLSearchParams({
-      co2: String(formData.co2),
-      cred: String(formData.cred),
+      co2: String(formData.co2 ||1),
+      cred: String(formData.cred||2),
       error: String(formData.error),
     }).toString();
 
@@ -41,6 +43,7 @@ export const HomeForm = () => {
           alt="credit card front image"
           width={160}
           height={620}
+          
         />
       </div>
       <div className="flex flex-col p-8 justify-center gap-10 items-start max-w-[375px] lg:max-w-[420px] bg-white shadow-custom-shadow-down-far border-2 rounded border-gray-300 -z-20">
@@ -67,6 +70,7 @@ export const HomeForm = () => {
             replacement={{ _: /\d/ }}
             placeholder="2"
             register={register("cred")}
+
           />
           <SwitchField
             name="error"
