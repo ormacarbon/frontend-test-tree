@@ -75,22 +75,22 @@ A MockAPI utilizada para a aplicação é a que foi disponibilizada pelo teste. 
 <p>Full Screen</p>
 <p width="100%">
 <img src="./public/prints/full-home-screen.png" alt="full-home-screen" width="40%" hspace="32"/>
-<img src="./public/prints/full-checkout-screen.png.png" alt="full-checkout-screen" width="40%" hspace="32"/>
+<img src="./public/prints/full-checkout-screen.png" alt="full-checkout-screen" width="40%" hspace="32"/>
 
 </p>
 <p width="100%">
 <img src="./public/prints/full-success-screen.png" alt="full-success-screen" width="40%" hspace="32"/>
-<img src="./public/prints/full-error-screen.png.png" alt="full-error-screen" width="40%" hspace="32"/>
+<img src="./public/prints/full-error-screen.png" alt="full-error-screen" width="40%" hspace="32"/>
 </p>
 <p>Mobile</p>
 <p width="100%">
 <img src="./public/prints/mobile-home-screen.png" alt="mobile-home-screen" width="40%" hspace="32"/>
-<img src="./public/prints/mobile-checkout-screen.png.png" alt="mobile-checkout-screen" width="40%" hspace="32"/>
+<img src="./public/prints/mobile-checkout-screen.png" alt="mobile-checkout-screen" width="40%" hspace="32"/>
 
 </p>
 <p width="100%">
 <img src="./public/prints/mobile-success-screen.png" alt="mobile-success-screen" width="40%" hspace="32"/>
-<img src="./public/prints/mobile-error-screen.png.png" alt="mobile-error-screen" width="40%" hspace="32"/>
+<img src="./public/prints/mobile-error-screen.png" alt="mobile-error-screen" width="40%" hspace="32"/>
 </p>
 </div>
 
