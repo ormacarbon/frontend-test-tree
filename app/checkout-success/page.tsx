@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Header } from "../_components/header";
 import Image from "next/image";
+import { Roboto_Condensed } from "next/font/google";
+
+const robotoCondensed = Roboto_Condensed({
+  weight: ["500"],
+  subsets: ["latin-ext"],
+});
 const CheckoutSuccessPage = () => {
   return (
     <main className="mx-auto flex w-full max-w-[1080px] flex-1 flex-col justify-center gap-8 py-10">
@@ -18,7 +24,9 @@ const CheckoutSuccessPage = () => {
           <h6 className="whitespace-pre text-center text-xl font-bold text-primary lg:text-left lg:text-2xl">
             Você compensou suas emissões {"\n"}com sucesso!
           </h6>
-          <h4 className="text-md font-roboto-condesend-medium text-center lg:text-left lg:text-lg">
+          <h4
+            className={`text-md ${robotoCondensed.className} text-center lg:text-left lg:text-lg`}
+          >
             <p className="whitespace-pre">
               Com essa ação você contribui para um mundo mais {"\n"}sustentável
             </p>

@@ -2,30 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.font-roboto-300 {
-  font-family: var(--font-roboto);
-  font-weight: 300;
-}
-
-.font-roboto-500 {
-  font-family: var(--font-roboto);
-  font-weight: 500;
-}
-
-.font-roboto-700 {
-  font-family: var(--font-roboto);
-  font-weight: 700;
-}
-
-.font-roboto-condesend-medium {
-  font-family: var(--font-roboto-condensed);
-  font-weight: 500;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -53,8 +29,20 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --font-roboto: "Roboto", sans-serif;
-    --font-roboto-condensed: "Roboto Condensed", sans-serif;
+    .font-roboto-300 {
+      font-family: var(--font-roboto);
+      font-weight: 300;
+    }
+
+    .font-roboto-500 {
+      font-family: var(--font-roboto);
+      font-weight: 500;
+    }
+
+    .font-roboto-700 {
+      font-family: var(--font-roboto);
+      font-weight: 700;
+    }
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -81,8 +69,20 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    --font-roboto: "Roboto", sans-serif;
-    --font-roboto-condensed: "Roboto Condensed", sans-serif;
+    .font-roboto-300 {
+      font-family: var(--font-roboto);
+      font-weight: 300;
+    }
+
+    .font-roboto-500 {
+      font-family: var(--font-roboto);
+      font-weight: 500;
+    }
+
+    .font-roboto-700 {
+      font-family: var(--font-roboto);
+      font-weight: 700;
+    }
   }
 }
 

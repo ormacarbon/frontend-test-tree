@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { Roboto, Roboto_Condensed } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
+import { Loading } from "./_components/loading";
 
 const roboto = Roboto({
   weight: ["700", "300", "500"],
   variable: "--font-roboto",
   subsets: ["latin-ext"],
-});
-
-export const robotoCondensed = Roboto_Condensed({
-  weight: "500",
-  subsets: ["latin"],
-  variable: "--font-roboto-condensed",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} antialiased`}>{children}</body>
+      <body className={`${roboto.className} antialiased`}>
+        <Suspense fallback={<Loading />}>{children}</Suspense>
+      </body>
     </html>
   );
 }

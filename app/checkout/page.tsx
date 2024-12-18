@@ -70,7 +70,7 @@ export default function CheckoutPage() {
         <div className="relative hidden h-auto min-h-[214px] w-full max-w-[351px] lg:flex">
           <Image src={"/credit-card.svg"} alt="credit card front image" fill />
         </div>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center rounded-lg shadow-[0_-4px_10px_rgba(0,0,0,0.10)] lg:shadow-xl">
           <h3 className="hidden text-4xl font-bold text-primary lg:flex">
             Resumo de compra
           </h3>
