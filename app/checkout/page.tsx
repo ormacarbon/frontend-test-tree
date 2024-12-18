@@ -38,7 +38,7 @@ export default function CheckoutPage() {
         <div className="flex w-full max-w-[572px] flex-col items-center gap-6 py-12">
           <Header />
           <CheckoutForm co2={co2} cred={cred} />
-          <div className="flex gap-5 sm:hidden">
+          <div className="flex gap-5 lg:hidden">
             <Image
               src="/dss-icon.svg"
               width={94}
@@ -52,7 +52,7 @@ export default function CheckoutPage() {
               que você possa utilizar todos os produtos com segurança.
             </p>
           </div>
-          <div className="flex w-full flex-1 justify-center gap-4 sm:hidden">
+          <div className="flex w-full flex-1 justify-center gap-4 lg:hidden">
             {icon.map((i) => (
               <Image
                 src={i.path}

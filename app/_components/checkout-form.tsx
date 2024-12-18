@@ -260,7 +260,9 @@ export const CheckoutForm = ({ co2, cred }: CheckoutForm) => {
         </div>
 
         <div className="flex flex-col-reverse items-center gap-3 font-bold md:justify-end lg:flex-row lg:gap-9">
-          <Button variant={"outline"}>Voltar</Button>
+          <Button variant={"outline"} type="button">
+            Voltar
+          </Button>
           <Button
             type="submit"
             disabled={!isValid || isSubmitting}
