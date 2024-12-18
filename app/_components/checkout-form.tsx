@@ -196,6 +196,10 @@ export const CheckoutForm = ({ co2, cred }: CheckoutForm) => {
                 )}
               />
 
+              <span className="absolute ml-[87px] mt-[33px] text-3xl text-primary">
+                /
+              </span>
+
               <FormField
                 control={form.control}
                 name="expiration_year"
@@ -240,7 +244,9 @@ export const CheckoutForm = ({ co2, cred }: CheckoutForm) => {
 
                 <Select value={field.value} onValueChange={field.onChange}>
                   <FormControl>
-                    <SelectTrigger>
+                    <SelectTrigger
+                      className={field.value ? "text-black" : "text-[#B0B0B0]"}
+                    >
                       <SelectValue placeholder="Selecionar..." />
                     </SelectTrigger>
                   </FormControl>

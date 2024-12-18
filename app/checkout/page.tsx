@@ -34,7 +34,7 @@ export default function CheckoutPage() {
 
   return (
     <main className="flex flex-col lg:flex-row">
-      <section className="flex-2 mt-16 flex w-full justify-center px-8 pb-48 pt-3">
+      <section className="flex-2 mt-20 flex w-full justify-center px-8 pb-48 pt-3">
         <div className="flex w-full max-w-[572px] flex-col items-center gap-6 py-12">
           <Header />
           <CheckoutForm co2={co2} cred={cred} />
@@ -66,7 +66,7 @@ export default function CheckoutPage() {
           </div>
         </div>
       </section>
-      <section className="fixed bottom-0 z-20 flex w-full flex-1 flex-col justify-center gap-16 bg-white lg:relative lg:min-w-[640px] lg:items-center lg:border-l-2 lg:border-l-[#F1F0F0]">
+      <section className="fixed bottom-0 z-20 flex w-full flex-1 flex-col justify-center gap-16 bg-white lg:relative lg:mb-8 lg:min-w-[640px] lg:items-center lg:border-l-2 lg:border-l-[#F1F0F0]">
         <div className="relative hidden h-auto min-h-[214px] w-full max-w-[351px] lg:flex">
           <Image src={"/credit-card.svg"} alt="credit card front image" fill />
         </div>
