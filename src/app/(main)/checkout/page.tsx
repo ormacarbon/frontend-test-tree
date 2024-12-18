@@ -1,6 +1,6 @@
 import { CheckoutForm } from "@/components/CheckoutForm";
 import { Header } from "@/components/Header";
-import { log } from "console";
+
 import Image from "next/image";
 interface CheckoutProps {
   searchParams: { [key: string]: string | string[] };
@@ -20,8 +20,8 @@ async function fetchCreditPrice(id: number) {
 }
 
 export default async function Checkout({ searchParams }: CheckoutProps) {
-  const co2 = await searchParams.co2;
-  const cred = await searchParams.cred;
+  const co2 = (await searchParams.co2) || 1;
+  const cred = (await searchParams.cred) || 2;
 
   const creditPrice: {
     createdAt: Date;

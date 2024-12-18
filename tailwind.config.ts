@@ -44,6 +44,7 @@ export default {
       boxShadow: {
         'custom-shadow-up': '8px 4px 32px 0 rgba(0, 0, 0, 0.15)',
         'custom-shadow-down': '0px 4px 4px 0 rgba(0, 0, 0, 0.15)',
+		'custom-shadow-down-far': '0px 8px 8px 0 rgba(0, 0, 0, 0.15)',
 
       },
 	  keyframes: {

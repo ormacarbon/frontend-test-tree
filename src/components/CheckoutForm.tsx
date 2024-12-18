@@ -172,7 +172,7 @@ export const CheckoutForm = ({ price }: CheckoutForm) => {
       </div>
 
       <div className="flex flex-col-reverse lg:flex-row items-center font-bold lg:justify-end gap-[36px]">
-        <Button>Voltar</Button>
+        <Button onClick={() => router.push("/")}>Voltar</Button>
         <Button
           type="submit"
           disabled={!isValid || isSubmitting}

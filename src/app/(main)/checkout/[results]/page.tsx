@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { error } from "console";
 import { Metadata } from "next";
 import Image from "next/image";
-
+import Link from "next/link";
 type ResultadoProps = {
   result: string;
   data: { title: string; subTitle: string; content: string };
@@ -56,16 +56,27 @@ const StatusPage = async ({ params }: Props) => {
               "flex flex-col gap-3 items-start lg:justify-start px-6 lg:px-0 max-w-[19rem] lg:max-w-none"
             }
           >
-            {contents?.map((content) => (
-              <strong className="font-condensed font-semibold text-sm lg:text-base">
+            {contents?.map((content, index) => (
+              <strong
+                key={index}
+                className="font-condensed font-semibold text-sm lg:text-base"
+              >
                 {content}
               </strong>
             ))}
           </div>
           <div className=" w-full flex flex-row justify-center lg:justify-normal p-12 lg:p-0">
-            <Button className="border-primary-500 text-white font-bold bg-primary-500 max-w-[285px]">
-              {result === "success" ? "Compartilhar": "Tentar novamente"}
-            </Button>
+            {result === "success" ? (
+              <Button className="border-primary-500 text-white font-bold bg-primary-500 max-w-[285px]">
+                Compartilhar
+              </Button>
+            ) : (
+              <Link className="w-full max-w-[285px] flex justify-center" href="/" passHref>
+                <Button className=" w-full border-primary-500 text-white font-bold bg-primary-500 ">
+                  Tentar novamente
+                </Button>
+              </Link>
+            )}
           </div>
         </section>
         <section className="flex flex-row">
