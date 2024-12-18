@@ -40,6 +40,8 @@ const formSchema = z.object({
   name_opparcelamento: z.string().nonempty("Opção de parcelamento é obrigatória"),
 });
 
+
+
 interface MyFormProps {
   total?: number | null;
   co2: number;
@@ -260,7 +262,7 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
-                  <PopoverContent className="w-full p-0">
+                  <PopoverContent className="w-full p-0 items-start">
                     <Command>
                       <CommandInput placeholder="Procurar forma de pagamento..." />
                       <CommandList>
