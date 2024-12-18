@@ -1,4 +1,35 @@
-# Desafio: Checkout para Compensação de Carbono
+<div align="center">
+  <h1 align="center">
+    Checkout Carbon
+    <br />
+    <br />
+      <img src="./public/prints/full-checkout-screen.png" alt="3D Virtual Assistent (Mobile)">
+  </h1>
+</div>
+<p align="center">
+  <img src="http://img.shields.io/static/v1?label=STATUS&message=DEPLOYED&color=GREEN&style=for-the-badge" alt="DEPLOYED" />
+<p/>
+
+# Tabela de Conteúdos
+  
+* [Tabela de Conteúdos](#tabela-de-conteúdos)
+* [Introdução](#introdução)
+* [Desafio](#desafio)
+    * [Requisitos](#requisitos)
+* [Como rodar a aplicação](#como-rodar-a-aplicação)
+* [Acessar aplicação hospedada](#acessar-aplicação-hospedada)
+* [API Mock](#api-mock)
+* [Screenshots](#screenshots)
+* [Tecnologias Utilizadas](#tecnologias-utilizadas)
+* [Contato técnico](#contato-técnico)
+
+# Introdução
+
+Essa é uma aplicação que simula a compensação de carbono.<br>
+Foi desenvolvida para um seguindo as instruções do desafio abaixo.
+
+
+# Desafio
 
 Neste desafio, você deverá recriar um layout de checkout fictício para compensação de carbono, conforme o design fornecido no Figma. Além disso, será necessário consumir dois endpoints da API:
 
@@ -20,54 +51,54 @@ O valor do crédito de carbono, que será atribuído ao parâmetro `cred` (ou `c
 
 A requisição ao endpoint `Get Credit Price` é necessária para garantir que o valor do crédito esteja sempre atualizado e de acordo com as especificações do sistema.
 
-FIGMA:
-[LAYOUT](https://www.figma.com/design/3dbuGSs6oCSLkPw9viSsfT/Front-end-Teste?node-id=0-1&t=KvUCyOT5Miiuh0D5-1)
+# Como rodar a aplicação
 
-## Consumo da API Mock
+Após clonar o repositório, rode os seguintes comandos em seu terminal para acessar a aplicação em produção:
 
-Use a API mock do Postman diponibilizada em /docs.
+```
+$ npm install
+$ npm run build
+$ npm run start
 
-### Importação da Coleção do Postman
+```
+**Obs:** Lembre de criar o arquivo .env para o endpoint da api
 
-Siga as etapas abaixo para importar a coleção e testar os endpoints do checkout.
+# Acessar aplicação hospedada
 
-1. Abra o Postman.
-2. Clique no botão **Importar** no canto superior esquerdo.
-![Onde clicar no postman para importar](./docs/image.png)
-3. Selecione o arquivo `Carbon_Checkout.postman_collection.json` localizado na pasta `doc/`.
+Para acessar a aplicação hospedada na Vercel, click [aqui](https://frontend-test-tree-three.vercel.app/)
 
-![Como deve ficar apos a importação.](./docs/image-2.png)
-4. Execute os testes com os parâmetros fornecidos para verificar o funcionamento correto da aplicação.
+# API Mock
 
+A MockAPI utilizada para a aplicação é a que foi disponibilizada pelo teste. Seu url pode ser encontrado na coleção do Postman
+# Screenshots
+<div>
+<p>Full Screen</p>
+<p width="100%">
+<img src="./public/prints/full-home-screen.png" alt="pagina-inicial" width="40%" hspace="32"/>
+<img src="./public/prints/full-checkout-screen.png.png" alt="pagina-inicial" width="40%" hspace="32"/>
+<img src="./public/prints/full-success-screen.png" alt="pagina-inicial" width="40%" hspace="32"/>
+<img src="./public/prints/full-error-screen.png.png" alt="pagina-inicial" width="40%" hspace="32"/>
+</p>
+<p>Mobile</p>
+<p width="100%">
+<img src="./public/prints/mobile-home-screen.png" alt="pagina-inicial" width="40%" hspace="32"/>
+<img src="./public/prints/mobile-checkout-screen.png.png" alt="pagina-inicial" width="40%" hspace="32"/>
+<img src="./public/prints/mobile-success-screen.png" alt="pagina-inicial" width="40%" hspace="32"/>
+<img src="./public/prints/mobile-error-screen.png.png" alt="pagina-inicial" width="40%" hspace="32"/>
+</p>
+</div>
+
+
+# Tecnologias Utilizadas
+ - [Next.js](https://nextjs.org/)
+ - [Tailwindcss](https://tailwindcss.com/)
+ - [React-hook-form](https://react-hook-form.com/)
+ - [Zod](https://zod.dev/)
+ - [@hookform/resolvers](https://www.npmjs.com/package/@hookform/resolvers/v/1.3.7)
+ - [imask](https://imask.js.org/)
+ - [Shadcn/ui](https://ui.shadcn.com/)
+ - [Axios](https://axios-http.com/ptbr/docs/intro)
 -----------------------------------------------------
-
-## FRAMEWORK
-
-- [NEXT.JS](https://nextjs.org/docs)
-
------------------------------------------------------
-
-## ESTILOS
-
-- Os estilos deste teste devem ser feitos em styled-components (ou tailwind).
-- O projeto ser o mais proximo possivel do layout fornecido.
-- Deve ser totalmente responsivo.
-
-## REQUISITOS DIFERENCIAIS:
-
-- Back-end (para desenvolvedores full-stack)
-- Código performático.
-- Manutenibilidade do Código.
-- Utilizar inglês no projeto todo.
-- Fazer deploy do mesmo (heroku, netlify, aws, vercel, github pages ou outro da preferência).
-
-## GIT
-- Faça um fork deste repositório.
-- Criar uma branch para codar as suas features.
-- Criar um pull-request quando o teste for finalizado e submetido.
-
-## Contato técnico.
-- Junior Schmidt
-- GSS | Desenvolvedor Back-end & Tech Lead.
-- schmidt@repenso.eco
-- www.gss.eco
+## Contato técnico
+- Daniel Colares Schmidt
+- danielmcolares@gmail.com
