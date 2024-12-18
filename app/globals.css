@@ -17,6 +17,11 @@
   font-weight: 700;
 }
 
+.font-roboto-condesend-medium {
+  font-family: var(--font-roboto-condensed);
+  font-weight: 500;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -30,7 +35,7 @@ body {
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
     --primary: 179, 100%, 32%;
-    --primary-foreground: 0 0% 98%;
+    --primary-foreground: 179, 100%, 29%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
@@ -49,6 +54,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
     --font-roboto: "Roboto", sans-serif;
+    --font-roboto-condensed: "Roboto Condensed", sans-serif;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -76,6 +82,7 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
     --font-roboto: "Roboto", sans-serif;
+    --font-roboto-condensed: "Roboto Condensed", sans-serif;
   }
 }
 
