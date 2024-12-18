@@ -30,7 +30,7 @@ export default function Page() {
   const cred = Number(searchParams.get('cred') || 1);
 
   return (
-    <div className="h-screen px-6 md:px-16 lg:px-32 py-6">
+    <div className="flex flex-col justify-center items-center h-screen px-6 md:items-start md:px-16 lg:px-32 py-6">
       <header className="flex flex-row items-center gap-3 pt-24">
         <Image src="/CarbonLogo.svg" width={30} height={45} alt="Logo" />
         <h1 className={`text-2xl md:text-3xl lg:text-4xl text-primaria ${roboto700.className}`}>
