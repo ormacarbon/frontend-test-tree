@@ -3,7 +3,7 @@
     Checkout Carbon
     <br />
     <br />
-      <img src="./public/prints/full-checkout-screen.png" alt="3D Virtual Assistent (Mobile)">
+      <img src="./public/logo.svg" width="86" height="118" alt="Checkout Carbon">
   </h1>
 </div>
 <p align="center">
