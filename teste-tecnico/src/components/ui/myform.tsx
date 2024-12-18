@@ -117,7 +117,6 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
   }
   return (
     <div className="relative">
-      {/* Tela de carregamento */}
       {isLoading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
           <Image src="/Loader.svg" width={100} height={100} alt="SucessImage" />
@@ -130,7 +129,6 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
           className="space-y-8 h-full max-w-2xl py-10 mb-40"
         >
           <div className="grid grid-cols-1 gap-4">
-            {/* Campos do formulário */}
             <FormField
               control={form.control}
               name="name_Nome"
@@ -145,7 +143,6 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
               )}
             />
           </div>
-              {/* Telefone e CPF */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <FormField
               control={form.control}
@@ -174,7 +171,6 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
               )}
             />
           </div>
-          {/* E-mail */}
           <FormField
             control={form.control}
             name="name_email"
@@ -188,7 +184,6 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
               </FormItem>
             )}
           />
-          {/* Dados do cartão */}
           <FormField
             control={form.control}
             name="name_numerocartao"
@@ -243,7 +238,6 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
               )}
             />
           </div>
-          {/* Parcelamento */}
           <FormField
             control={form.control}
             name="name_opparcelamento"
@@ -304,7 +298,6 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
               </FormItem>
             )}
           />
-          {/* Botões */}
           <div className="flex flex-col md:flex-row justify-end gap-4">
             <Button
               className="text-base text-botaoProsseguir bg-white border-2 m-4 w-72"

@@ -43,17 +43,17 @@ export default function Page() {
         </div>
         <div className="md:w-1/3 hidden md:flex flex-col items-center justify-center gap-y-10">
           <Image src="/CardIcon.svg" width={351} height={214} alt="Cartão" />
-          <ResumoCompra amount={amount} />
+          <PurchaseResume amount={amount} />
         </div>
         <div className="md:hidden fixed bottom-0 left-0 w-full bg-white p-4 shadow-lg">
-          <ResumoCompra amount={amount} />
+          <PurchaseResume amount={amount} />
         </div>
       </main>
     </div>
   );
 }
 
-function ResumoCompra({ amount }: { amount: number | null }) {
+function PurchaseResume({ amount }: { amount: number | null }) {
   return (
     <div className="p-6 rounded-md md:shadow-md">
       <h1 className={`text-xl md:text-2xl lg:text-3xl text-primaria p-3 ${roboto700.className}`}>
