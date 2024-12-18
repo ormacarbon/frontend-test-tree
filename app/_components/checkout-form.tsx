@@ -204,7 +204,7 @@ export const CheckoutForm = ({ co2, cred }: CheckoutForm) => {
                 control={form.control}
                 name="expiration_year"
                 render={({ field }) => (
-                  <FormItem className="mr-[150px] w-[85px]">
+                  <FormItem className="w-[85px] lg:mr-[150px]">
                     <div className="text-white">.</div>
                     <FormControl>
                       <Input placeholder="AA" type="number" {...field} />
@@ -222,12 +222,7 @@ export const CheckoutForm = ({ co2, cred }: CheckoutForm) => {
                 <FormItem>
                   <FormLabel>CVC/CVV</FormLabel>
                   <FormControl className="col-span-2 md:col-span-1">
-                    <Input
-                      className=""
-                      placeholder="123"
-                      type="number"
-                      {...field}
-                    />
+                    <Input placeholder="123" type="number" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
