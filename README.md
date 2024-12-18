@@ -1,4 +1,4 @@
-# Desafio: Checkout para Compensação de Carbono
+# Desafio
 
 Neste desafio, você deverá recriar um layout de checkout fictício para compensação de carbono, conforme o design fornecido no Figma. Além disso, será necessário consumir dois endpoints da API:
 
@@ -21,55 +21,47 @@ O valor do crédito de carbono, que será atribuído ao parâmetro `cred` (ou `c
 
 A requisição ao endpoint `Get Credit Price` é necessária para garantir que o valor do crédito esteja sempre atualizado e de acordo com as especificações do sistema.
 
-FIGMA:
-[LAYOUT](https://www.figma.com/design/3dbuGSs6oCSLkPw9viSsfT/Front-end-Teste?node-id=0-1&t=KvUCyOT5Miiuh0D5-1)
+# Rodando o projeto localmente
 
-## Consumo da API Mock
+Você deverá clonar o repositório, depois rodar os comandos abaixo:
 
-Use a API mock do Postman diponibilizada em /docs.
+```
+$ npm install
+$ npm run dev
 
-### Importação da Coleção do Postman
+```
 
-Siga as etapas abaixo para importar a coleção e testar os endpoints do checkout.
+**Obs:** Lembre-se de criar o arquivo .env e fornecer a URL da API
 
-1. Abra o Postman.
-2. Clique no botão **Importar** no canto superior esquerdo.
-   ![Onde clicar no postman para importar](./docs/image.png)
-3. Selecione o arquivo `Carbon_Checkout.postman_collection.json` localizado na pasta `doc/`.
+```
+ NEXT_PUBLIC_API
 
-![Como deve ficar apos a importação.](./docs/image-2.png) 4. Execute os testes com os parâmetros fornecidos para verificar o funcionamento correto da aplicação.
+```
+
+# API Mock
+
+A MockAPI utilizada para a aplicação está disponibilizada dentro da {{url}} do Postman mas para facilitar está aqui:
+
+```
+ https://6751f822d1983b9597b4fa68.mockapi.io/api
+
+```
+
+# Tecnologias Utilizadas
+
+- [Next.js](https://nextjs.org/)
+- [Tailwindcss](https://tailwindcss.com/)
+- [Shadcn/ui](https://ui.shadcn.com/)
+- [React-hook-form](https://react-hook-form.com/)
+- [Zod](https://zod.dev/)
+- [@hookform/resolvers](https://www.npmjs.com/package/@hookform/resolvers/v/1.3.7)
 
 ---
 
-## FRAMEWORK
+## Deploy na Vercel
 
-- [NEXT.JS](https://nextjs.org/docs)
+O frontend da aplicação foi implantado na Vercel, garantindo fácil acesso e escalabilidade. A Vercel oferece integração contínua e deploy automático sempre que alterações são feitas no repositório.
 
----
+A aplicação pode ser acessada através do seguinte link:
 
-## ESTILOS
-
-- Os estilos deste teste devem ser feitos em styled-components (ou tailwind).
-- O projeto ser o mais proximo possivel do layout fornecido.
-- Deve ser totalmente responsivo.
-
-## REQUISITOS DIFERENCIAIS:
-
-- Back-end (para desenvolvedores full-stack)
-- Código performático.
-- Manutenibilidade do Código.
-- Utilizar inglês no projeto todo.
-- Fazer deploy do mesmo (heroku, netlify, aws, vercel, github pages ou outro da preferência).
-
-## GIT
-
-- Faça um fork deste repositório.
-- Criar uma branch para codar as suas features.
-- Criar um pull-request quando o teste for finalizado e submetido.
-
-## Contato técnico.
-
-- Junior Schmidt
-- GSS | Desenvolvedor Back-end & Tech Lead.
-- schmidt@repenso.eco
-- www.gss.eco
+- [Clique aqui para ver em projeto em produção](https://frontend-test-tree-eight.vercel.app)
