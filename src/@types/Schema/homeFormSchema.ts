@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const HomeFormSchema = z.object({
-  co2: z.number(),
-  cred: z.number(),
+  co2: z.string().transform((val) => parseInt(val)),
+  cred: z.string().transform((val) => parseInt(val)),
   error: z.boolean(),
 });
 
