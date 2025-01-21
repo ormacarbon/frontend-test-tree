@@ -31,13 +31,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen px-6 md:items-start md:px-16 lg:px-32 py-6">
-      <header className="flex flex-row items-center gap-3 pt-24">
-        <Image src="/CarbonLogo.svg" width={30} height={45} alt="Logo" />
-        <h1 className={`text-2xl md:text-3xl lg:text-4xl text-primaria ${roboto700.className}`}>
-          Checkout Carbon
-        </h1>
-      </header>
-      <main className="flex flex-col md:flex-row md:gap-72 h-full mt-8">
+      <main className="flex flex-col md:flex-row md:m-auto md:gap-80 h-full mt-8">
         <div className="flex flex-col w-full md:w-2/4 items-start justify-start">
           <MyForm total={amount} co2={co2} cred={cred} />
         </div>

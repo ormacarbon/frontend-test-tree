@@ -24,6 +24,7 @@ import {
 import { Check, ChevronsUpDown } from "lucide-react";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "./ui/command";
 import { cn } from "@/lib/utils";
+import { roboto700 } from "@/app/ui/fonts";
 
 const formSchema = z.object({
   name_Nome: z.string().nonempty("Nome é obrigatório"),
@@ -128,6 +129,12 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 h-full max-w-2xl py-10 mb-40"
         >
+          <header className="flex flex-row items-center gap-3 pt-24">
+            <Image src="/CarbonLogo.svg" width={30} height={45} alt="Logo" />
+            <h1 className={`text-2xl md:text-3xl lg:text-4xl text-primaria ${roboto700.className}`}>
+              Checkout Carbon
+            </h1>
+          </header>
           <div className="grid grid-cols-1 gap-4">
             <FormField
               control={form.control}
