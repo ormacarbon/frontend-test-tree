@@ -171,7 +171,19 @@ export default function MyForm({ total = 0, co2, cred, setCardDetails }: MyFormP
                 <FormItem>
                   <FormLabel>Telefone</FormLabel>
                   <FormControl>
-                    <Input placeholder="(00) 0 0000-0000" type="number" {...field} />
+                    <Input
+                      placeholder="(00) 0 0000-0000"
+                      type="text"
+                      maxLength={15}
+                      {...field}
+                      onChange={(e) => {
+                        const value = e.target.value
+                          .replace(/\D/g, '')
+                          .replace(/(\d{2})(\d)/, '($1) $2')
+                          .replace(/(\d{1})(\d{4})(\d{4})$/, '$1 $2-$3');
+                        field.onChange(value);
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -183,9 +195,22 @@ export default function MyForm({ total = 0, co2, cred, setCardDetails }: MyFormP
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>CPF</FormLabel>
-                  <FormControl>
-                    <Input placeholder="000.000.000-00" type="number" {...field} />
-                  </FormControl>
+                    <FormControl>
+                    <Input
+                      placeholder="000.000.000-00"
+                      type="text"
+                      {...field}
+                      maxLength={14}
+                      onChange={(e) => {
+                      const value = e.target.value
+                        .replace(/\D/g, '')
+                        .replace(/(\d{3})(\d)/, '$1.$2')
+                        .replace(/(\d{3})(\d)/, '$1.$2')
+                        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                      field.onChange(value);
+                      }}
+                    />
+                    </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -213,13 +238,17 @@ export default function MyForm({ total = 0, co2, cred, setCardDetails }: MyFormP
                 <FormControl>
                   <Input
                     placeholder="1234 5678 9012 3456"
-                    type="number"
+                    type="text"
                     {...field}
                     onChange={(e) => {
-                      field.onChange(e);
-                      handleInputChange('number', e.target.value);
+                      const value = e.target.value
+                        .replace(/\D/g, '')
+                        .replace(/(\d{4})(\d{1,4})?(\d{1,4})?(\d{1,4})?/, '$1 $2 $3 $4')
+                        .trim();
+                      field.onChange(value);
+                      handleInputChange('number', value);
                     }}
-                    maxLength={16}
+                    maxLength={19}
                   />
                 </FormControl>
                 <FormMessage />
@@ -233,17 +262,19 @@ export default function MyForm({ total = 0, co2, cred, setCardDetails }: MyFormP
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Data de Validade</FormLabel>
-                  <FormControl>
+                    <FormControl>
                     <Input
+                      maxLength={2}
                       placeholder="MM"
-                      type="number"
+                      type="text"
                       {...field}
                       onChange={(e) => {
-                        field.onChange(e);
-                        handleInputChange('expiry', `${e.target.value}/${form.getValues('name_anovalidade')}`);
+                      const value = e.target.value.replace(/\D/g, '').slice(0, 2);
+                      field.onChange(value);
+                      handleInputChange('expiry', `${value}/${form.getValues('name_anovalidade')}`);
                       }}
                     />
-                  </FormControl>
+                    </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -254,17 +285,19 @@ export default function MyForm({ total = 0, co2, cred, setCardDetails }: MyFormP
               render={({ field }) => (
                 <FormItem>
                   <div className="text-white">.</div>
-                  <FormControl>
+                    <FormControl>
                     <Input
+                      maxLength={4}
                       placeholder="AAAA"
-                      type="number"
+                      type="text"
                       {...field}
                       onChange={(e) => {
-                        field.onChange(e);
-                        handleInputChange('expiry', `${form.getValues('name_mesvalidade')}/${e.target.value}`);
+                      const value = e.target.value.replace(/\D/g, '').slice(0, 4);
+                      field.onChange(value);
+                      handleInputChange('expiry', `${form.getValues('name_mesvalidade')}/${value}`);
                       }}
                     />
-                  </FormControl>
+                    </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -275,18 +308,20 @@ export default function MyForm({ total = 0, co2, cred, setCardDetails }: MyFormP
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>CVC/CVV</FormLabel>
-                  <FormControl className="col-span-2 md:col-span-1">
+                    <FormControl className="col-span-2 md:col-span-1">
                     <Input
                       className=""
                       placeholder="123"
-                      type="number"
+                      type="text"
+                      maxLength={3}
                       {...field}
                       onChange={(e) => {
-                        field.onChange(e);
-                        handleInputChange('cvc', e.target.value);
+                      const value = e.target.value.replace(/\D/g, '').slice(0, 3);
+                      field.onChange(value);
+                      handleInputChange('cvc', value);
                       }}
                     />
-                  </FormControl>
+                    </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
