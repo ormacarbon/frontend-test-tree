@@ -20,7 +20,11 @@ export default function Page() {
 
   useEffect(() => {
     const co2 = Number(searchParams.get('co2') || 1);
-    const cred = searchParams.get('cred');
+    let cred = Number(searchParams.get('cred') || 1);
+
+    // Ensure cred is between 1 and 100
+    if (cred < 1) cred = 1;
+    if (cred > 100) cred = 100;
 
     if (cred) {
       fetch(`https://6751f822d1983b9597b4fa68.mockapi.io/api/credit-price/${cred}`)
@@ -35,7 +39,11 @@ export default function Page() {
   }, [searchParams]);
 
   const co2 = Number(searchParams.get('co2') || 1);
-  const cred = Number(searchParams.get('cred') || 1);
+  let cred = Number(searchParams.get('cred') || 1);
+
+  // Ensure cred is between 1 and 100
+  if (cred < 1) cred = 1;
+  if (cred > 100) cred = 100;
 
   return (
     <div className="flex p-6 md:flex-col md:fixed m-auto justify-center items-center h-full w-full">
