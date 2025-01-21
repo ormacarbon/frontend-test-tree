@@ -38,8 +38,8 @@ export default function Page() {
   const cred = Number(searchParams.get('cred') || 1);
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen px-6 md:items-start md:px-16 lg:px-32 py-6">
-      <main className="flex flex-col md:flex-row md:m-auto md:gap-80 h-full mt-8">
+    <div className="flex p-6 md:flex-col md:fixed m-auto justify-center items-center h-full w-full">
+      <main className="flex flex-col md:flex-row md:m-auto md:gap-80 h-full -mt-20">
         <div className="flex flex-col w-full md:w-2/4 items-start justify-start">
           <MyForm total={amount} co2={co2} cred={cred} setCardDetails={setCardDetails} />
         </div>
