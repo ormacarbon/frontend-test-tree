@@ -4,11 +4,19 @@ import React, { useEffect, useState } from 'react';
 import Image from "next/image";
 import { roboto300, roboto500, roboto700 } from '@/app/ui/fonts';
 import MyForm from '@/components/ui/myform';
+import CreditCard from '@/components/ui/credit-card';
 import { useSearchParams } from 'next/navigation';
 
 export default function Page() {
   const searchParams = useSearchParams();
   const [amount, setAmount] = useState<number | null>(null);
+  const [cardDetails, setCardDetails] = useState({
+    number: '',
+    expiry: '',
+    cvc: '',
+    name: '',
+    focus: '',
+  });
 
   useEffect(() => {
     const co2 = Number(searchParams.get('co2') || 1);
@@ -33,10 +41,10 @@ export default function Page() {
     <div className="flex flex-col justify-center items-center h-screen px-6 md:items-start md:px-16 lg:px-32 py-6">
       <main className="flex flex-col md:flex-row md:m-auto md:gap-80 h-full mt-8">
         <div className="flex flex-col w-full md:w-2/4 items-start justify-start">
-          <MyForm total={amount} co2={co2} cred={cred} />
+          <MyForm total={amount} co2={co2} cred={cred} setCardDetails={setCardDetails} />
         </div>
         <div className="md:w-2/4 hidden md:flex flex-col justify-center gap-y-10">
-          <Image src="/CardIcon.svg" width={351} height={214} alt="Cartão" />
+          <CreditCard {...cardDetails} />
           <PurchaseResume amount={amount} />
         </div>
         <div className="md:hidden fixed bottom-0 left-0 w-full bg-white p-4 shadow-lg">

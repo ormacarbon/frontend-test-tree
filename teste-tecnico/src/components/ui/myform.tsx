@@ -47,7 +47,7 @@ interface MyFormProps {
   cred: number;
 }
 
-export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
+export default function MyForm({ total = 0, co2, cred, setCardDetails }: MyFormProps & { setCardDetails: (details: Record<string, string>) => void }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -71,6 +71,10 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
       name_opparcelamento: '',
     }
   });
+
+  const handleInputChange = (field: string, value: string) => {
+    setCardDetails((prev: Record<string, string>) => ({ ...prev, [field]: value }));
+  };
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const paymentData = {
@@ -116,6 +120,7 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
       setIsLoading(false);
     }
   }
+
   return (
     <div className="relative">
       {isLoading && (
@@ -143,7 +148,15 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
                 <FormItem>
                   <FormLabel>Nome</FormLabel>
                   <FormControl>
-                    <Input placeholder="Nome" type="text" {...field} />
+                    <Input
+                      placeholder="Nome"
+                      type="text"
+                      {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleInputChange('name', e.target.value);
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -151,7 +164,7 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
+            <FormField
               control={form.control}
               name="name_telefone"
               render={({ field }) => (
@@ -198,7 +211,16 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
               <FormItem>
                 <FormLabel>Número do Cartão</FormLabel>
                 <FormControl>
-                  <Input placeholder="1234 5678 9012 3456" type="number" {...field} />
+                  <Input
+                    placeholder="1234 5678 9012 3456"
+                    type="number"
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      handleInputChange('number', e.target.value);
+                    }}
+                    maxLength={16}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -212,7 +234,15 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
                 <FormItem>
                   <FormLabel>Data de Validade</FormLabel>
                   <FormControl>
-                    <Input placeholder="MM" type="number" {...field} />
+                    <Input
+                      placeholder="MM"
+                      type="number"
+                      {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleInputChange('expiry', `${e.target.value}/${form.getValues('name_anovalidade')}`);
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -225,7 +255,15 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
                 <FormItem>
                   <div className="text-white">.</div>
                   <FormControl>
-                    <Input placeholder="AAAA" type="number" {...field} />
+                    <Input
+                      placeholder="AAAA"
+                      type="number"
+                      {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleInputChange('expiry', `${form.getValues('name_mesvalidade')}/${e.target.value}`);
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -237,9 +275,18 @@ export default function MyForm({ total = 0, co2, cred }: MyFormProps) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>CVC/CVV</FormLabel>
-                    <FormControl className="col-span-2 md:col-span-1">
-                    <Input className="" placeholder="123" type="number" {...field} />
-                    </FormControl>
+                  <FormControl className="col-span-2 md:col-span-1">
+                    <Input
+                      className=""
+                      placeholder="123"
+                      type="number"
+                      {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleInputChange('cvc', e.target.value);
+                      }}
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
