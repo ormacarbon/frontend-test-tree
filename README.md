@@ -61,10 +61,11 @@ Siga as etapas abaixo para importar a coleção e testar os endpoints do checkou
 - Utilizar inglês no projeto todo.
 - Fazer deploy do mesmo (heroku, netlify, aws, vercel, github pages ou outro da preferência).
 
-## GIT
+## Instruções
 - Faça um fork deste repositório.
 - Criar uma branch para codar as suas features.
 - Criar um pull-request quando o teste for finalizado e submetido.
+- Você tem até domingo, dia 08 de Junho de 2025 às 23:59.
 
 ## Contato técnico.
 - Lara Vieira
