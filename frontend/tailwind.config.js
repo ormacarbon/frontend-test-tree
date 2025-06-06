@@ -53,7 +53,11 @@ module.exports = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+              'btn-primary': {
+                  DEFAULT: 'hsl(var(--btn-primary-bg))',
+                  hover: 'hsl(var(--btn-primary-hover))'
+              }
   		}
   	}
   },
