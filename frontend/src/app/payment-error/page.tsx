@@ -47,7 +47,7 @@ export default function PaymentErrorPage() {
           
           <button 
             onClick={handleTryAgain}
-            className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-3 md:py-1 px-12 md:px-16 rounded-md transition-colors w-full max-w-xs md:w-auto md:max-w-none md:mt-12 text-base md:text-lg"
+            className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-1 px-12 md:px-16 rounded-md transition-colors w-full max-w-xs md:w-auto md:max-w-none md:mt-12 text-base md:text-lg"
           >
             Tentar novamente
           </button>
