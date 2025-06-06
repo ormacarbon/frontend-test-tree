@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useCreditPrice } from '@/hooks/useCreditPrice'
 
 interface CheckoutFormProps {
   isDesktop?: boolean
 }
 
 export function CheckoutForm({ isDesktop = false }: Readonly<CheckoutFormProps>) {
+  const { loading, totalValue, formatCurrency } = useCreditPrice();
+
   const [formData, setFormData] = useState({
     name: "Augusto de C R dos Anjos",
     email: isDesktop ? "augustodosantos@quimera.com.br" : "AugustoCRA@gmail.com",
@@ -22,6 +25,20 @@ export function CheckoutForm({ isDesktop = false }: Readonly<CheckoutFormProps>)
     cvc: "123",
     installments: ""
   })
+
+  const generateInstallmentOptions = () => {
+    if (loading || totalValue === 0) return [];
+    
+    const options = [];
+    for (let i = 1; i <= 12; i++) {
+      const installmentValue = totalValue / i;
+      const label = `${i} x ${formatCurrency(installmentValue)}`;
+      options.push({ value: `${i}x`, label });
+    }
+    return options;
+  };
+
+  const installmentOptions = generateInstallmentOptions();
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -153,14 +170,24 @@ export function CheckoutForm({ isDesktop = false }: Readonly<CheckoutFormProps>)
         <Select 
           value={formData.installments} 
           onValueChange={(value) => handleInputChange('installments', value)}
+          disabled={loading || totalValue === 0}
         >
-          <SelectTrigger className={`mt-1 bg-muted border-0 rounded-xl ${isDesktop ? "mb-4" : "mb-8"}`}>
-            <SelectValue placeholder="Selecionar" />
+          <SelectTrigger className={`mt-1 bg-gray-200 border-0 rounded-xl ${isDesktop ? "mb-4" : "mb-8"} font-bold`}>
+            <SelectValue 
+              placeholder={loading ? "Carregando..." : "Selecionar"} 
+              className="font-bold"
+            />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="1x">1x sem juros</SelectItem>
-            <SelectItem value="2x">2x sem juros</SelectItem>
-            <SelectItem value="3x">3x sem juros</SelectItem>
+          <SelectContent className="bg-gray-200">
+            {installmentOptions.map((option) => (
+              <SelectItem 
+                key={option.value} 
+                value={option.value}
+                className="font-bold hover:bg-gray-300 focus:bg-gray-300"
+              >
+                {option.label}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
