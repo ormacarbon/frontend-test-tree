@@ -1,11 +1,55 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
+import { getCreditPrice, type CreditPrice } from '@/services/creditService'
 
 interface SummaryCardProps {
   isDesktop?: boolean
 }
 
-export function SummaryCard({ isDesktop = false }: SummaryCardProps) {
+export function SummaryCard({ isDesktop = false }: Readonly<SummaryCardProps>) {
+  const searchParams = useSearchParams();
+  const [creditPrice, setCreditPrice] = useState<CreditPrice | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Extract parameters from URL
+  const co2Quantity = Number(searchParams.get('co2')) || 1;
+  const creditPriceId = searchParams.get('cred') || '2';
+
+  useEffect(() => {
+    async function fetchCreditPrice() {
+      try {
+        setLoading(true);
+        setError(null);
+        const price = await getCreditPrice(creditPriceId);
+        setCreditPrice(price);
+      } catch (err) {
+        setError('Erro ao carregar preço');
+        console.error('Error fetching credit price:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCreditPrice();
+  }, [creditPriceId]);
+
+  const unitPrice = creditPrice?.amout ?? 0;
+  const totalValue = co2Quantity * unitPrice;
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value);
+  };
+
+  const displayValue = loading ? 'Carregando...' : error ? 'Erro' : formatCurrency(totalValue);
+
   if (isDesktop) {
     return (
       <div>
@@ -24,7 +68,7 @@ export function SummaryCard({ isDesktop = false }: SummaryCardProps) {
               </div>
               <div>
                 <p className="text-lg text-muted-foreground leading-tight">Compensação de<br></br> emissões</p>
-                <p className="text-lg font-bold text-foreground">R$ 300</p>
+                <p className="text-lg font-bold text-foreground">{displayValue}</p>
               </div>
             </div>
           </CardContent>
@@ -49,7 +93,7 @@ export function SummaryCard({ isDesktop = false }: SummaryCardProps) {
           <div>
             <p className="text-base font-bold text-primary">Resumo de compra</p>
             <p className="text-sm text-muted-foreground max-w-[120px]">Compensação de emissões</p>
-            <p className="text-lg font-bold text-foreground">R$ 300</p>
+            <p className="text-lg font-bold text-foreground">{displayValue}</p>
           </div>
         </div>
       </div>
