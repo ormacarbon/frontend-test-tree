@@ -17,7 +17,7 @@ export function SummaryCard({ isDesktop = false }: Readonly<SummaryCardProps>) {
     return (
       <div>
         <h2 className="text-xl font-bold text-primary text-center mb-3">Resumo de compra</h2>
-        <Card className="shadow-md p-0 rounded-none border-t-0 border-l border-r border-b w-[90%] mx-auto">
+        <Card className="shadow-md p-0 rounded-none bg-white border-t-0 border-l border-r border-b w-[90%] mx-auto">
           <CardContent className="pt-3">
             <div className="flex items-center justify-center space-x-3">
               <div className="w-12 h-12 flex items-center justify-center flex-shrink-0">

@@ -10,7 +10,7 @@ export function Logo() {
         height={44}
         className="w-8 h-11"
       />
-      <h1 className="text-3xl font-bold text-teal-600">Checkout Carbon</h1>
+      <h1 className="text-2xl md:text-3xl font-bold text-teal-600">Checkout Carbon</h1>
     </div>
   )
 }
