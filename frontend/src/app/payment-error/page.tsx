@@ -21,7 +21,7 @@ export default function PaymentErrorPage() {
           
           <div className="mb-8 md:hidden">
             <Image 
-              src="/logoSucessMobile.svg" 
+              src="/logoErro.svg" 
               alt="Erro - Ícone" 
               width={171}
               height={171}

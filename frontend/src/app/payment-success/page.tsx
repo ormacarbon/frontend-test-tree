@@ -14,7 +14,7 @@ export default function PaymentSuccessPage() {
           
           <div className="mb-8 md:hidden">
             <Image 
-              src="/logoSucessMobile.svg" 
+              src="/logoSuccessMobile.svg" 
               alt="Sucesso - Folhas" 
               width={171}
               height={171}
