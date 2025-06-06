@@ -15,7 +15,7 @@ export function Loading() {
   }, []);
 
   return (
-    <div className="fixed inset-[-25px] bg-black bg-opacity-30 flex items-center justify-center">
+    <div className="fixed inset-[-25px] bg-black bg-opacity-30 flex items-center justify-center z-50">
       <div className="w-20 h-20">
         <Image
           src={`/cicularSpinner-${currentSpinner}.svg`}
