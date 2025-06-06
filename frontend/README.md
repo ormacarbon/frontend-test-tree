@@ -26,6 +26,12 @@ O projeto segue fielmente o design fornecido no Figma, implementando:
 - Componentes reutilizáveis
 - Interfaces responsivas
 
+## ⚙️ Configurando para teste local
+
+Adicione o arquivo .env com a variavel abaixo com o link do mock:
+
+- NEXT_PUBLIC_API_BASE_URL=sua_url
+
 ## 👥 Autor
 
 Antonio Aldacélio Cavalcante - [GitHub](https://github.com/Aldacelio)
