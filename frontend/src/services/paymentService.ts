@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://6751f822d1983b9597b4fa68.mockapi.io/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export interface PaymentData {
   co2: number;
