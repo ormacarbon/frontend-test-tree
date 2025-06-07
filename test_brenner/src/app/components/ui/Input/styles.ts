@@ -5,6 +5,7 @@ export const InputStyled = styled.input`
     width: ${({ width }) => width || '1rem'};
     height: ${({ height }) => height || '0.5rem'};
     
+    padding-left: 3%;
     background-color: #F4F4F499;
     border: none;
     color: black;

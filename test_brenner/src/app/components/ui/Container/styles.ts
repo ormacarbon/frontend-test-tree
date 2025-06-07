@@ -5,7 +5,9 @@ export const ContainerStyled =  styled.div`
     width: 100vw;
     height: 100vh;
     max-width: 100%;
-    background-color: red;
+    padding-top: 2.875rem; //46px
+        
+    //background-color: red;
     
     display: flex;
     flex-wrap: wrap;

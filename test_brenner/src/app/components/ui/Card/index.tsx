@@ -1,5 +1,4 @@
-import { CardColumnStyled, CardRowStyled } from "./style";
-
+import { CardColumnStyled, CardRowStyled, PurchaseSummaryCard } from "./style"
 
 export interface ICardProps {
     children: React.ReactNode;
@@ -11,4 +10,8 @@ export function CardColumn({ ...props }:ICardProps){
 
 export function CardRow({ ...props }:ICardProps){
     return <CardRowStyled>{props.children}</CardRowStyled>
+}
+
+export function SummaryCard({ ...props }:ICardProps){
+    return <PurchaseSummaryCard>{props.children}</PurchaseSummaryCard>
 }

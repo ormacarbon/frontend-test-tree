@@ -32,10 +32,14 @@ export const ButtonStyled = styled.button<IButtonStyled>`
     background-color: ${buttonVariants[variant]};
   `}
 
+  width: ${({ width }) => width || "100%"};
+  height: ${({ height }) => height || "100%"};
+
   border: none;
   border-radius: 4px;
   color: white;
-  font-size: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
   cursor: pointer;
   padding: 0 16px;
   transition: background-color 0.2s;
