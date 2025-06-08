@@ -24,13 +24,18 @@ export const Row = styled.div`
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  //background-color: yellow;
   height: 5rem;
 
   & > div {
     flex: 1;
   }
 `;
+
+export const Section = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 export const Select = styled.select`
   width: 100%;

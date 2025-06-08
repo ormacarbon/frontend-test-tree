@@ -22,8 +22,8 @@ import styled, { css } from "styled-components";
 import { IButtonStyled } from "./@interface";
 
 const buttonVariants = {
-    primary: 'grey',
-    success: 'green'
+    primary: '#B0B0B0',
+    success: '#00A19D'
 };
 
 export const ButtonStyled = styled.button<IButtonStyled>`

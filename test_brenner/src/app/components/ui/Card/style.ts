@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
-//background color
-// width ou height ou Margin
-// fazer herança
+
 
 const CardGeneric = styled.div`
     display: flex;
@@ -17,7 +15,9 @@ const CardGeneric = styled.div`
 
 export const CardColumnStyled = styled(CardGeneric)`
 //card com comportamento de coluna
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: red;
     max-width: 100%;
 
@@ -35,6 +35,18 @@ export const CardRowStyled = styled(CardGeneric)`
     padding-bottom: 180px;
 
 `
+
+export const CardSummaryRow = styled.div`
+  display: flex;
+  gap: 2%;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+
+  & > div {
+    flex: 1;
+  }
+`;
 
 export const PurchaseSummaryCard = styled.div`
   max-width: 100%;

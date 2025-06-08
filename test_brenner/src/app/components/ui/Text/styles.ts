@@ -6,6 +6,8 @@ export const TextStyled = styled.p<ITextStyled>`
     color: ${({ color }) => color || "black"};
 
     //font-weight: bold;
-    max-width: 100%;
-    word-wrap: break-word; //quebrar linha
+    margin: 1%;
+    max-width: 8   0%;
+    flex-wrap: wrap;
+    //word-wrap: break-word; 
 `
