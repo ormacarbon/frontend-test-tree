@@ -2,6 +2,7 @@
 import styled from "styled-components";
 
 export const FormWrapper = styled.form`
+  //Mobile First
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -10,6 +11,18 @@ export const FormWrapper = styled.form`
   margin: 0 auto;
   //background-color: red;
   padding: 6%;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    padding: 1%;
+    gap: 2%;
+    max-width: 100%;
+    box-sizing: border-box;
+    //border: 2px solid green;
+    max-height: 50%;
+
+    }
+
 `;
 
 export const InputGroup = styled.div`
@@ -49,25 +62,22 @@ export const Select = styled.select`
 `;
 
 export const ButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  //background-color: red;
-  gap: 12px;
-  margin-top: 24px;
-  width: 100%;
-  height: 5rem;
+  //Mobile first
+  flex-direction: column;
+  background-color: green;
+  height: 10vh;
 
-  & > button {
-    flex: 1;
-    min-width: 120px;
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding: 1%;
+    background-color: red;
+    gap: 12px;
+    margin-top: 24px;
+    width: 50%;
+    height: 3rem;
   }
 
-  @media (max-width: 500px) {
-    flex-direction: column;
-    & > button {
-      width: 100%;
-    }
-  }
 `;
 

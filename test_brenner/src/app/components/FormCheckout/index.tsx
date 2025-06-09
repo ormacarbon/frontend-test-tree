@@ -46,7 +46,7 @@ export function FormCheckout() {
       // simula envio para API
       await new Promise(resolve => setTimeout(resolve, 2000));
       console.log('Formulário enviado com sucesso:', formData);
-      
+
       setFormData(formData);
     } catch (err) {
       console.error('Erro ao enviar o formulário', err);

@@ -12,3 +12,12 @@ export const HeadingStyled2 = styled.h2`
     color: #00A19D; //colocar essa cor em theme
     font-weight: bold;
 `
+
+export const DivHeading = styled.div`
+    border: 1px solid;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    max-width: 100%;
+    //background-color: green;
+`

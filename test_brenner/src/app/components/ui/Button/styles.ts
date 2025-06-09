@@ -52,4 +52,7 @@ export const ButtonStyled = styled.button<IButtonStyled>`
     opacity: 0.6;
     cursor: not-allowed;
   }
+
+  @media (min-width: 1024px) {
+  }
 `
