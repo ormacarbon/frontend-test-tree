@@ -30,7 +30,7 @@ export default function Home() {
             asChild
             className="bg-[#00a19eb0] text-white text-xl md:text-3xl h-18 hover:bg-[#00A19D] transition-colors"
           >
-            <Link href="/">Realizar Checkout</Link>
+            <Link href="/checkout">Realizar Checkout</Link>
           </Button>
         </CardContent>
       </Card>
