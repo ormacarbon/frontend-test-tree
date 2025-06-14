@@ -73,7 +73,7 @@ export function CheckoutForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 p-4 bg-white rounded-xl  pb-40"
+        className="space-y-6 p-4 bg-white rounded-xl pb-40 md: pb-0"
       >
 
         <FormField
@@ -83,7 +83,7 @@ export function CheckoutForm() {
             <FormItem>
               <FormLabel className="text-[#00A19D] font-bold text-base">Nome</FormLabel>
               <FormControl>
-                <Input placeholder="Augusto de C R dos Anjos" {...field} />
+                <Input className="bg-[#F4F4F499] border-0" placeholder="Augusto de C R dos Anjos" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -102,7 +102,7 @@ export function CheckoutForm() {
                     {...field}
                     mask="(00) 00000-0000"
                     placeholder="(11) 91234-5678"
-                    className="w-full h-10 px-3 border rounded-md"
+                    className="w-full h-10 px-3 rounded-md bg-[#F4F4F499] border-0"
                   />
                 </FormControl>
                 <FormMessage />
@@ -121,7 +121,7 @@ export function CheckoutForm() {
                     {...field}
                     mask="000.000.000-00"
                     placeholder="123.456.789-00"
-                    className="w-full h-10 px-3 border rounded-md"
+                    className="w-full h-10 px-3 rounded-md bg-[#F4F4F499] border-0"
                   />
                 </FormControl>
                 <FormMessage />
@@ -137,7 +137,7 @@ export function CheckoutForm() {
             <FormItem>
               <FormLabel className="text-[#00A19D] font-bold text-base">E-mail</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="AugustoCRA@gmail.com" {...field} />
+                <Input className="bg-[#F4F4F499] border-0" type="email" placeholder="AugustoCRA@gmail.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -155,7 +155,7 @@ export function CheckoutForm() {
                   {...field}
                   mask="0000 0000 0000 0000"
                   placeholder="1234 5678 9012 3456"
-                  className="w-full h-10 px-3 border rounded-md"
+                  className="w-full h-10 px-3 rounded-md bg-[#F4F4F499] border-0"
                 />
               </FormControl>
               <FormMessage />
@@ -175,7 +175,7 @@ export function CheckoutForm() {
                     {...field}
                     mask="00/00"
                     placeholder="MM/AA"
-                    className="w-full h-10 px-3 border rounded-md"
+                    className="w-full h-10 px-3 rounded-md bg-[#F4F4F499] border-0"
                   />
                 </FormControl>
                 <FormMessage />
@@ -194,7 +194,7 @@ export function CheckoutForm() {
                     {...field}
                     mask="000"
                     placeholder="123"
-                    className="w-full h-10 px-3 border rounded-md"
+                    className="w-full h-10 px-3 rounded-md bg-[#F4F4F499] border-0"
                   />
                 </FormControl>
                 <FormMessage />
@@ -212,7 +212,7 @@ export function CheckoutForm() {
               <FormControl>
                 <select
                   {...field}
-                  className="w-full h-10 px-3 border rounded-md text-gray-800"
+                  className="w-full h-10 px-3 border rounded-md  bg-[#F4F4F499]"
                 >
                   <option value="">Selecionar</option>
                   <option value="1x">1x R$ 300</option>
@@ -227,19 +227,20 @@ export function CheckoutForm() {
           )}
         />
 
-        <div className="grid gap-2">
-          <Button  
+        <div className="grid gap-2 md:grid-cols-2">
+          <Button
             type="submit"
             disabled={!form.formState.isValid}
             className={`transition-colors ${form.formState.isValid
                 ? "bg-[#00A19D] hover:bg-[#008d89] text-white"
                 : "bg-gray-400 cursor-not-allowed text-white"
               }`}
-          > 
+          >
             <Link href="/success">Prosseguir</Link>
           </Button>
-          <Button type="button" variant="outline">
-             <Link href="/">Voltar</Link>
+
+          <Button className="md:order-first" type="button" variant="outline">
+            <Link href="/">Voltar</Link>
           </Button>
         </div>
       </form>
