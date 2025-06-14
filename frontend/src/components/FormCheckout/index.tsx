@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import React from "react"
 import Link from "next/link"
+import { InputWithMask, InputWithoutMask } from "./formFild"
 
 
 const formSchema = z.object({
@@ -55,8 +56,6 @@ export function CheckoutForm() {
     },
   })
 
-  console.log(form.watch());
-
   function onSubmit(data: FormData) {
     const cleaned = {
       ...data,
@@ -75,131 +74,63 @@ export function CheckoutForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6 p-4 bg-white rounded-xl pb-40 md: pb-0"
       >
-
-        <FormField
+        <InputWithoutMask
+          type={"text"}
           control={form.control}
-          name="nome"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-[#00A19D] font-bold text-base">Nome</FormLabel>
-              <FormControl>
-                <Input className="bg-[#F4F4F499] border-0" placeholder="Augusto de C R dos Anjos" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          name={"nome"}
+          labelName={"Nome"}
+          placeholder={"Augusto de C R dos Anjos"}
         />
 
         <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
-          <FormField
+          <InputWithMask
             control={form.control}
-            name="telefone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-[#00A19D] font-bold text-base">Telefone</FormLabel>
-                <FormControl>
-                  <MaskedInput
-                    {...field}
-                    mask="(00) 00000-0000"
-                    placeholder="(11) 91234-5678"
-                    className="w-full h-10 px-3 rounded-md bg-[#F4F4F499] border-0"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            name={"telefone"}
+            labelName={"Telefone"}
+            mask={"(00) 00000-0000"}
+            placeholder={"(11) 91234-5678"}
           />
 
-          <FormField
+          <InputWithMask
             control={form.control}
-            name="cpf"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-[#00A19D] font-bold text-base">CPF</FormLabel>
-                <FormControl>
-                  <MaskedInput
-                    {...field}
-                    mask="000.000.000-00"
-                    placeholder="123.456.789-00"
-                    className="w-full h-10 px-3 rounded-md bg-[#F4F4F499] border-0"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            name={"cpf"}
+            labelName={"CPF"}
+            mask={"000.000.000-00"}
+            placeholder={"123.456.789-00"}
           />
         </div>
 
-        <FormField
+        <InputWithoutMask
+          type={"email"}
           control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-[#00A19D] font-bold text-base">E-mail</FormLabel>
-              <FormControl>
-                <Input className="bg-[#F4F4F499] border-0" type="email" placeholder="AugustoCRA@gmail.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          name={"email"}
+          labelName={"E-mail"}
+          placeholder={"AugustoCRA@gmail.com"}
         />
 
-        <FormField
+        <InputWithMask
           control={form.control}
-          name="numeroCartao"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-[#00A19D] font-bold text-base">Número do Cartão</FormLabel>
-              <FormControl>
-                <MaskedInput
-                  {...field}
-                  mask="0000 0000 0000 0000"
-                  placeholder="1234 5678 9012 3456"
-                  className="w-full h-10 px-3 rounded-md bg-[#F4F4F499] border-0"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          name={"numeroCartao"}
+          labelName={"Número do Cartão"}
+          mask={"0000 0000 0000 0000"}
+          placeholder={"1234 5678 9012 3456"}
         />
 
         <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
-          <FormField
+          <InputWithMask
             control={form.control}
-            name="validade"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-[#00A19D] font-bold text-base">Validade</FormLabel>
-                <FormControl>
-                  <MaskedInput
-                    {...field}
-                    mask="00/00"
-                    placeholder="MM/AA"
-                    className="w-full h-10 px-3 rounded-md bg-[#F4F4F499] border-0"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            name={"validade"}
+            labelName={"Validade"}
+            mask={"00/00"}
+            placeholder={"MM/AA"}
           />
 
-          <FormField
+          <InputWithMask
             control={form.control}
-            name="cvc"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-[#00A19D] font-bold text-base">CVC</FormLabel>
-                <FormControl>
-                  <MaskedInput
-                    {...field}
-                    mask="000"
-                    placeholder="123"
-                    className="w-full h-10 px-3 rounded-md bg-[#F4F4F499] border-0"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            name={"cvc"}
+            labelName={"CVC"}
+            mask={"000"}
+            placeholder={"578"}
           />
         </div>
 
@@ -232,8 +163,8 @@ export function CheckoutForm() {
             type="submit"
             disabled={!form.formState.isValid}
             className={`transition-colors ${form.formState.isValid
-                ? "bg-[#00A19D] hover:bg-[#008d89] text-white"
-                : "bg-gray-400 cursor-not-allowed text-white"
+              ? "bg-[#00A19D] hover:bg-[#008d89] text-white"
+              : "bg-gray-400 cursor-not-allowed text-white"
               }`}
           >
             <Link href="/success">Prosseguir</Link>
