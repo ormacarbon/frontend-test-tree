@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button"
 import React from "react"
 import Link from "next/link"
 import { InputWithMask, InputWithoutMask } from "./formFild"
+import { CheckoutFormProps } from "@/types/checkout"
 
 
 const formSchema = z.object({
@@ -40,7 +41,7 @@ const MaskedInput = React.forwardRef<HTMLInputElement, any>(
 )
 MaskedInput.displayName = "MaskedInput"
 
-export function CheckoutForm() {
+export function CheckoutForm({ onStartLoading }: CheckoutFormProps) {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
@@ -65,7 +66,13 @@ export function CheckoutForm() {
       validade: data.validade.replace(/\D/g, ""),
     }
     console.log("Dados enviados:", cleaned)
-    form.reset();
+    // 🔄 Ativa o loading externo
+    onStartLoading();
+
+    // Simula um delay (remova isso se usar API real)
+    setTimeout(() => {
+      window.location.href = "/success"
+    }, 2000);
   }
 
   return (
@@ -167,7 +174,7 @@ export function CheckoutForm() {
               : "bg-gray-400 cursor-not-allowed text-white"
               }`}
           >
-            <Link href="/success">Prosseguir</Link>
+            Prosseguir
           </Button>
 
           <Button className="md:order-first" type="button" variant="outline">
