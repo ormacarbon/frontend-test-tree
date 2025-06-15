@@ -12,51 +12,47 @@ export default function CheckoutContent() {
 
   const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
-  const [co2Value, setCo2Value] = useState<string | null>(null)
-  const [credValue, setCredValue] = useState<string | null>(null)
-  const [creditData, setCreditData] = useState<any>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [co2Value, setCo2Value] = useState<number | null>(null);
+  const [credValue, setCredValue] = useState<number | null>(null);
+  const [creditData, setCreditData] = useState<number>();
+  const [error, setError] = useState<string | null>(null);
+
+  const cred = searchParams.get('cred');
+  const co2 = searchParams.get('co2');
+
+  const totalCredit = co2Value && creditData ? co2Value * creditData : 0;
 
   useEffect(() => {
-    
-    const fetchCreditData = async (credId: string) => {
-      try {
-        setIsLoading(true)
+    const fetchCreditData = async () => {
+      if (!cred) return;
 
-        const response = await getCreditPrice(credId);
-        console.log(response.amout);
+      try {
+        setIsLoading(true);
+        const response = await getCreditPrice(cred);
         
-        if (!response) {
-          throw new Error("Erro ao buscar o crédito")
+        if (!response?.amout) {
+          throw new Error("Dados do crédito inválidos");
         }
 
         setCreditData(response.amout);
+        setCo2Value(co2 ? Number(co2) : null);
+        setCredValue(cred ? Number(cred) : null);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Erro desconhecido")
+        setError(err instanceof Error ? err.message : "Erro desconhecido");
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    }
-    
-    const cred = searchParams.get('cred')
-    const co2 = searchParams.get('co2')
-    
-    setCo2Value(co2)
-    setCredValue(cred)
-    
-    if (cred) {
-      fetchCreditData(cred)
-    }
+    };
 
-  }, [searchParams])
-
+    fetchCreditData();
+  }, [cred, co2]); 
 
   return (
     <>
       {isLoading && <LoadingOverlay />}
 
       <div className="h-screen flex flex-col md:grid md:grid-cols-2">
-        <div className="p-5">
+        <div className="p-5 md:p-20 md:border-r-1">
           <header className="flex items-center mb-5">
             <Image src="/Group.svg" alt="Logo" height={50} width={50} />
             <h1 className="text-3xl ml-3 text-[#00A19DF2] font-bold">
@@ -64,7 +60,7 @@ export default function CheckoutContent() {
             </h1>
           </header>
 
-          <CheckoutForm co2={co2Value} cred={credValue} onStartLoading={() => setIsLoading(true)}/>
+          <CheckoutForm co2={co2Value} cred={credValue} totalPrice={totalCredit} onStartLoading={() => setIsLoading(true)} />
         </div>
 
         <div
@@ -91,7 +87,7 @@ export default function CheckoutContent() {
               <Image src="/CardIcon.svg" alt="Ícone" height={50} width={50} />
               <div className="flex flex-col">
                 <p className="text-base">Compensação de emissões</p>
-                <p className="text-2xl font-bold">R$: {creditData}</p>
+                <p className="text-2xl font-bold">R$: {totalCredit.toFixed(2)}</p>
               </div>
             </section>
           </Card>

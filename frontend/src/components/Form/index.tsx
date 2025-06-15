@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/button"
 import React, { useState } from "react"
 import Link from "next/link"
-import { InputWithMask, InputWithoutMask } from "./formFild"
+import { InputWithMask, InputWithoutMask } from "./formInput"
 import { CheckoutFormProps, IPaymentRequest } from "@/types/checkout"
 import { processPayment } from "@/server/processPayment"
 import { Loader2 } from "lucide-react"
@@ -41,7 +41,9 @@ const MaskedInput = React.forwardRef<HTMLInputElement, any>(
 )
 MaskedInput.displayName = "MaskedInput"
 
-export function CheckoutForm({ co2, cred, onStartLoading }: CheckoutFormProps) {
+const installmentOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+export function CheckoutForm({ co2, cred, totalPrice, onStartLoading }: CheckoutFormProps) {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
@@ -97,7 +99,6 @@ export function CheckoutForm({ co2, cred, onStartLoading }: CheckoutFormProps) {
       const paymentData = transformToPaymentData(cleanedData)
       const result = await processPayment(paymentData)
 
-      console.log("Teste de resultado: ", result)
       if ( result.ok) {
         const responseData = await result.json()
         if (responseData.status === 'success') {
@@ -190,16 +191,15 @@ export function CheckoutForm({ co2, cred, onStartLoading }: CheckoutFormProps) {
             <FormItem>
               <FormLabel className="text-[#00A19D] font-bold text-base">Opções de Parcelamento</FormLabel>
               <FormControl>
-                <select
-                  {...field}
+                <select {...field}
                   className="w-full h-10 px-3 border rounded-md  bg-[#F4F4F499]"
                 >
                   <option value="">Selecionar</option>
-                  <option value="1x">1x R$ 300</option>
-                  <option value="2x">2x R$ 150</option>
-                  <option value="3x">3x R$ 100</option>
-                  <option value="4x">4x R$ 75</option>
-                  <option value="5x">5x R$ 60</option>
+                  {installmentOptions.map((num) => (
+                    <option key={num} value={`${num}x`}>
+                      {num}x de R$ {(totalPrice / num).toFixed(2)}
+                    </option>
+                  ))}
                 </select>
               </FormControl>
               <FormMessage />

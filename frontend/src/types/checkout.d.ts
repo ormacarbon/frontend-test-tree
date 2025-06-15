@@ -1,6 +1,7 @@
-export type CheckoutFormProps = {
-  co2: string | null;
-  cred: string | null;
+export type  CheckoutFormProps = {
+  co2: number | null;
+  cred: number | null;
+  totalPrice: number;
   onStartLoading: () => void
 }
 
