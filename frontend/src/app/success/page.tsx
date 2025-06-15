@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import StatusPage from "@/components/StatusPage"
 import mobileSuccess from "@/../public/mobileSuccess.svg"
 import desktopSuccess from "@/../public/desktopSuccess.svg"
-import Image from "next/image"
 
 export default function SuccessPage() {
     const [imageSrc, setImageSrc] = useState(mobileSuccess)

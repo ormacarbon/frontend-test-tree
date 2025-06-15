@@ -7,8 +7,10 @@ import Image from "next/image"
 import { useState } from "react"
 
 export default function Checkout() {
+
+  const [isLoading, setIsLoading] = useState(false);
+
   
-  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <>

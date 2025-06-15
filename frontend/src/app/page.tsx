@@ -9,7 +9,9 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 
+
 export default function Home() {
+
   return (
     <div className="h-screen flex items-center justify-center bg-white">
       <Card className="grid min-w-[40%] min-h-[50%] grid-cols-2 border border-[#00a19e43] bg-[#f4f4f4] shadow-md">
@@ -30,7 +32,7 @@ export default function Home() {
             asChild
             className="bg-[#00a19eb0] text-white text-xl md:text-3xl h-18 hover:bg-[#00A19D] transition-colors"
           >
-            <Link href="/checkout">Realizar Checkout</Link>
+            <Link href="/checkout?co2=1&cred=2">Realizar Checkout</Link>
           </Button>
         </CardContent>
       </Card>

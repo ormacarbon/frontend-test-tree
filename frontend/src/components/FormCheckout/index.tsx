@@ -13,7 +13,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import React from "react"
 import Link from "next/link"
@@ -66,10 +65,8 @@ export function CheckoutForm({ onStartLoading }: CheckoutFormProps) {
       validade: data.validade.replace(/\D/g, ""),
     }
     console.log("Dados enviados:", cleaned)
-    // 🔄 Ativa o loading externo
     onStartLoading();
 
-    // Simula um delay (remova isso se usar API real)
     setTimeout(() => {
       window.location.href = "/success"
     }, 2000);
