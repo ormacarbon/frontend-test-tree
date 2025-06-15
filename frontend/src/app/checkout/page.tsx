@@ -4,13 +4,53 @@ import { CheckoutForm } from "@/components/FormCheckout"
 import { LoadingOverlay } from "@/components/Loading"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
-import { useState } from "react"
+import { useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
+import { getCreditPrice } from "@/server/getCreditPrice"
 
 export default function Checkout() {
 
   const [isLoading, setIsLoading] = useState(false);
+  const searchParams = useSearchParams() 
+  const [co2Value, setCo2Value] = useState<string | null>(null)
+  const [credValue, setCredValue] = useState<string | null>(null)
+  const [creditData, setCreditData] = useState<any>(null)
+  const [error, setError] = useState<string | null>(null)
 
-  
+  useEffect(() => {
+    
+    const fetchCreditData = async (credId: string) => {
+      try {
+        setIsLoading(true)
+        //@ts-ignore
+        const response = await getCreditPrice(cred);
+        //ajustar o any -> tipar corretamente
+        console.log(response.amout);
+        
+        if (!response) {
+          throw new Error("Erro ao buscar o crédito")
+        }
+
+        setCreditData(response.amout);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Erro desconhecido")
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    const cred = searchParams.get('cred')
+    const co2 = searchParams.get('co2')
+    
+    setCo2Value(co2)
+    setCredValue(cred)
+    
+    if (cred) {
+      fetchCreditData(cred)
+    }
+
+  }, [searchParams])
+
 
   return (
     <>
@@ -25,7 +65,7 @@ export default function Checkout() {
             </h1>
           </header>
 
-          <CheckoutForm onStartLoading={() => setIsLoading(true)}/>
+          <CheckoutForm co2={co2Value} cred={credValue} onStartLoading={() => setIsLoading(true)}/>
         </div>
 
         <div
@@ -52,7 +92,7 @@ export default function Checkout() {
               <Image src="/CardIcon.svg" alt="Ícone" height={50} width={50} />
               <div className="flex flex-col">
                 <p className="text-base">Compensação de emissões</p>
-                <p className="text-2xl font-bold">R$: 300</p>
+                <p className="text-2xl font-bold">R$: {creditData}</p>
               </div>
             </section>
           </Card>

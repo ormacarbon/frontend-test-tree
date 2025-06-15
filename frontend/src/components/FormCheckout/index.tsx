@@ -14,11 +14,12 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
-import React from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import { InputWithMask, InputWithoutMask } from "./formFild"
-import { CheckoutFormProps } from "@/types/checkout"
-
+import { CheckoutFormProps, IPaymentRequest } from "@/types/checkout"
+import { processPayment } from "@/server/processPayment"
+import { Loader2 } from "lucide-react"
 
 const formSchema = z.object({
   nome: z.string().min(3, "O nome deve ter pelo menos 3 caracteres"),
@@ -40,7 +41,7 @@ const MaskedInput = React.forwardRef<HTMLInputElement, any>(
 )
 MaskedInput.displayName = "MaskedInput"
 
-export function CheckoutForm({ onStartLoading }: CheckoutFormProps) {
+export function CheckoutForm({ co2, cred, onStartLoading }: CheckoutFormProps) {
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
@@ -56,20 +57,64 @@ export function CheckoutForm({ onStartLoading }: CheckoutFormProps) {
     },
   })
 
-  function onSubmit(data: FormData) {
-    const cleaned = {
-      ...data,
-      telefone: data.telefone.replace(/\D/g, ""),
-      cpf: data.cpf.replace(/\D/g, ""),
-      numeroCartao: data.numeroCartao.replace(/\D/g, ""),
-      validade: data.validade.replace(/\D/g, ""),
-    }
-    console.log("Dados enviados:", cleaned)
-    onStartLoading();
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-    setTimeout(() => {
-      window.location.href = "/success"
-    }, 2000);
+  const transformToPaymentData = (formData: FormData): IPaymentRequest => {
+    const [expiryMonth, expiryYear] = formData.validade.split('/')
+    
+    return {
+      co2: Number(co2),
+      cred: Number(cred),
+      card_number: formData.numeroCartao.replace(/\D/g, ""),
+      expiration_month: Number(expiryMonth),
+      expiration_year: Number(`20${expiryYear}`),
+      security_code: formData.cvc,
+      cardholder: {
+        name: formData.nome,
+        identification: {
+          type: "CPF",
+          number: formData.cpf.replace(/\D/g, "")
+        }
+      }
+    }
+  }
+
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true)
+    setErrorMessage(null)
+    onStartLoading()
+
+    try {
+      const cleanedData = {
+        ...data,
+        telefone: data.telefone.replace(/\D/g, ""),
+        cpf: data.cpf.replace(/\D/g, ""),
+        numeroCartao: data.numeroCartao.replace(/\D/g, ""),
+        validade: data.validade.replace(/\D/g, ""),
+      }
+
+      const paymentData = transformToPaymentData(cleanedData)
+      const result = await processPayment(paymentData)
+
+      console.log("Teste de resultado: ", result)
+      if ( result.ok) {
+        const responseData = await result.json()
+        if (responseData.status === 'success') {
+          window.location.href = "/success"
+        } else {
+          setErrorMessage(responseData.message || "Erro ao processar pagamento")
+        }
+      } else {
+        const errorData = await result.json().catch(() => ({}))
+        setErrorMessage(errorData.message || "Erro na requisição")
+      }
+    } catch (error) {
+      console.error("Erro no processamento:", error)
+      setErrorMessage("Ocorreu um erro inesperado. Tente novamente.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -165,15 +210,22 @@ export function CheckoutForm({ onStartLoading }: CheckoutFormProps) {
         <div className="grid gap-2 md:grid-cols-2">
           <Button
             type="submit"
-            disabled={!form.formState.isValid}
-            className={`transition-colors ${form.formState.isValid
-              ? "bg-[#00A19D] hover:bg-[#008d89] text-white"
-              : "bg-gray-400 cursor-not-allowed text-white"
-              }`}
+            disabled={!form.formState.isValid || isSubmitting}
+            className={`transition-colors ${
+              form.formState.isValid
+                ? "bg-[#00A19D] hover:bg-[#008d89] text-white"
+                : "bg-gray-400 cursor-not-allowed text-white"
+            }`}
           >
-            Prosseguir
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Processando...
+              </>
+            ) : (
+              "Prosseguir"
+            )}
           </Button>
-
           <Button className="md:order-first" type="button" variant="outline">
             <Link href="/">Voltar</Link>
           </Button>

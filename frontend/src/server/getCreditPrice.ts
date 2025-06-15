@@ -1,18 +1,24 @@
-import { NextResponse } from "next/server";
+// src/server/getCreditPrice.ts
+interface ICreditData {
+  id: string;
+  amout: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
-const URL = process.env.NEXT_BASE_URL;
+export async function getCreditPrice(credId: string): Promise<ICreditData> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/credit-price/${credId}`
+    );
 
-export async function getCreditPrice(credId: string) {
-    try {
-        const response = await fetch(`${URL}/credit-price/${credId}`);
-        console.log(response);
-
-        if(!response) {
-            return NextResponse.json({message: "Ocorreu um erro na response!"});
-        }
-
-        return NextResponse.json( response , { status: 200 });
-    } catch (error) {
-        throw new Error("Erro ao buscar o crédito!");
+    if (!response.ok) {
+      throw new Error(`Erro HTTP: ${response.status}`);
     }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Falha ao buscar crédito:', error);
+    throw new Error('Não foi possível obter os dados do crédito');
+  }
 }
