@@ -1,6 +1,6 @@
 "use client"
 
-import { CheckoutForm } from "@/components/FormCheckout"
+import { CheckoutForm } from "@/components/Form"
 import { LoadingOverlay } from "@/components/Loading"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"

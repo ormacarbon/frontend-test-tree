@@ -4,7 +4,6 @@ import { useState } from "react"
 import StatusPage from "@/components/StatusPage"
 
 import mobileError from "@/../public/mobileError.svg"
-import Image from "next/image"
 
 export default function ErrorPage() {
     const [imageSrc, setImageSrc] = useState(mobileError);

@@ -121,7 +121,7 @@ export function CheckoutForm({ co2, cred, onStartLoading }: CheckoutFormProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 p-4 bg-white rounded-xl pb-40 md: pb-0"
+        className="space-y-6 p-4 bg-white rounded-xl pb-40 md:pb-5"
       >
         <InputWithoutMask
           type={"text"}
