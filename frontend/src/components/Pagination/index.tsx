@@ -6,6 +6,7 @@ import {
   PaginationItem,
 } from "@/components/ui/pagination"
 import { Button } from "@/components/ui/button"
+import { useIsMobile } from "@/hook/screenSize"
 
 interface PaginationProps {
   currentPage: number
@@ -20,25 +21,26 @@ export default function CustomPagination({
   onPageChange,
   className = "",
 }: PaginationProps) {
-  const visiblePages = () => {
-    const pages = []
-    const maxVisible = 5
+   const isMobile = useIsMobile();
 
-    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2))
-    let endPage = startPage + maxVisible - 1
+  const visiblePages = () => {
+    const pages = [];
+    const maxVisible = isMobile ? 3 : 5;
+
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+    let endPage = startPage + maxVisible - 1;
 
     if (endPage > totalPages) {
-      endPage = totalPages
-      startPage = Math.max(1, endPage - maxVisible + 1)
+      endPage = totalPages;
+      startPage = Math.max(1, endPage - maxVisible + 1);
     }
 
     for (let i = startPage; i <= endPage; i++) {
-      pages.push(i)
+      pages.push(i);
     }
 
-    return pages
-  }
-
+    return pages;
+  };
   return (
     <Pagination className={className}>
       <PaginationContent>
