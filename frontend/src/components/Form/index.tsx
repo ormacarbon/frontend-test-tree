@@ -70,7 +70,7 @@ export function CheckoutForm({ co2, cred, totalPrice, onStartLoading }: Checkout
       cred: Number(cred),
       card_number: formData.numeroCartao.replace(/\D/g, ""),
       expiration_month: Number(expiryMonth),
-      expiration_year: Number(`20${expiryYear}`),
+      expiration_year: Number(`20${27}`),
       security_code: formData.cvc,
       cardholder: {
         name: formData.nome,
@@ -97,15 +97,17 @@ export function CheckoutForm({ co2, cred, totalPrice, onStartLoading }: Checkout
       }
 
       const paymentData = transformToPaymentData(cleanedData)
-      const result = await processPayment(paymentData)
+      console.log(paymentData);
+      const result = await processPayment(paymentData);
+      
 
-      if ( result.ok) {
+      if (result.ok) {
         const responseData = await result.json()
         if (responseData.status === 'success') {
           window.location.href = "/success"
         } else {
-          setErrorMessage(responseData.message || "Erro ao processar pagamento")
           window.location.href = "/error"
+          setErrorMessage(responseData.message || "Erro ao processar pagamento")
         }
       } else {
         const errorData = await result.json().catch(() => ({}))

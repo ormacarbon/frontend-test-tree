@@ -1,4 +1,3 @@
-// types/credit.ts
 export interface ICreditData {
   id: string;
   amout: number;
@@ -11,12 +10,12 @@ export async function getAllCredit(): Promise<ICreditData[]> {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/credit-price`);
     
     if (!response.ok) {
-      throw new Error(`Erro HTTP: ${response.status}`);
+      throw new Error(`HTTP Error: ${response.status}`);
     }
 
     return await response.json();
   } catch (error) {
-    console.error('Falha ao buscar créditos:', error);
-    throw new Error('Não foi possível obter os dados dos créditos');
+    console.error('Failed to fetch credits:', error);
+    throw new Error('Unable to retrieve credit data');
   }
 }

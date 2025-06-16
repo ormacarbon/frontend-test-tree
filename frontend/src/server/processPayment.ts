@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function processPayment(data: PaymentRequest): Promise<NextResponse<SuccessResponse | ErrorResponse>> {
   try {
+    console.log(data)
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/payment`, {
       method: 'POST',
       headers: {
@@ -16,7 +17,7 @@ export async function processPayment(data: PaymentRequest): Promise<NextResponse
       return NextResponse.json(
         {
           status: 'error',
-          message: errorData.message || 'Erro ao processar pagamento',
+          message: errorData.message || 'Failed to process payment.',
           error_code: response.status
         },
         { status: response.status }
@@ -28,7 +29,7 @@ export async function processPayment(data: PaymentRequest): Promise<NextResponse
     return NextResponse.json(
       {
         status: 'success',
-        message: 'Pagamento realizado com sucesso',
+        message: 'Payment processed successfully.',
         payment_id: paymentData.id || `pay_${Math.random().toString(36).substr(2, 9)}`,
         amout: data.co2 * data.cred,
         credit_amount: data.co2
@@ -37,11 +38,11 @@ export async function processPayment(data: PaymentRequest): Promise<NextResponse
     );
     
   } catch (error) {
-    console.error('Erro no processamento do pagamento:', error);
+    console.error('Payment processing error:', error);
     return NextResponse.json(
       {
         status: 'error',
-        message: 'Falha na comunicação com o servidor de pagamentos',
+        message: 'Failed to communicate with the payment server.',
         error_code: 500
       },
       { status: 500 }

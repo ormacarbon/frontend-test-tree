@@ -12,12 +12,12 @@ export async function getCreditPrice(credId: string): Promise<ICreditData> {
     );
 
     if (!response.ok) {
-      throw new Error(`Erro HTTP: ${response.status}`);
+      throw new Error(`HTTP Error: ${response.status}`);
     }
 
     return await response.json();
   } catch (error) {
-    console.error('Falha ao buscar crédito:', error);
-    throw new Error('Não foi possível obter os dados do crédito');
+    console.error('Failed to fetch credit data:', error);
+    throw new Error('Unable to retrieve credit data');
   }
 }
