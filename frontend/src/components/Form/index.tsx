@@ -105,6 +105,7 @@ export function CheckoutForm({ co2, cred, totalPrice, onStartLoading }: Checkout
           window.location.href = "/success"
         } else {
           setErrorMessage(responseData.message || "Erro ao processar pagamento")
+          window.location.href = "/error"
         }
       } else {
         const errorData = await result.json().catch(() => ({}))
