@@ -1,4 +1,3 @@
-// src/server/payment.ts
 import { ErrorResponse, SuccessResponse, PaymentRequest } from "@/types/payment";
 import { NextResponse } from "next/server";
 

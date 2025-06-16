@@ -5,15 +5,17 @@ import { getAllCredit, ICreditData } from '@/server/getAllCredit';
 import { CreditCard} from '@/components/CreditCard';
 import Pagination from '@/components/Pagination';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useIsMobile } from '@/hook/screenSize';
 
-const ITEMS_PER_PAGE = 8;
 
 export default function Home() {
   const [credits, setCredits] = useState<ICreditData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-
+  
+  const isMobile = useIsMobile();
+  const ITEMS_PER_PAGE = isMobile ? 3 : 8;
   useEffect(() => {
     const fetchCredits = async () => {
       try {
@@ -37,7 +39,7 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-[#00A19D] mb-4">

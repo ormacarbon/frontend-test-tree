@@ -1,75 +1,78 @@
 "use client"
 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+} from "@/components/ui/pagination"
+import { Button } from "@/components/ui/button"
+
 interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-  className?: string;
+  currentPage: number
+  totalPages: number
+  onPageChange: (page: number) => void
+  className?: string
 }
 
-export default function Pagination({
+export default function CustomPagination({
   currentPage,
   totalPages,
   onPageChange,
-  className = '',
+  className = "",
 }: PaginationProps) {
+  const visiblePages = () => {
+    const pages = []
+    const maxVisible = 5
+
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2))
+    let endPage = startPage + maxVisible - 1
+
+    if (endPage > totalPages) {
+      endPage = totalPages
+      startPage = Math.max(1, endPage - maxVisible + 1)
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i)
+    }
+
+    return pages
+  }
+
   return (
-    <div className={`flex justify-center items-center gap-2 ${className}`}>
-      <button
-        onClick={() => onPageChange(Math.max(1, currentPage - 1))}
-        disabled={currentPage === 1}
-        className="px-4 py-2 border rounded-md disabled:opacity-50"
-      >
-        Anterior
-      </button>
-
-      {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-        let pageNum;
-        if (totalPages <= 5) {
-          pageNum = i + 1;
-        } else if (currentPage <= 3) {
-          pageNum = i + 1;
-        } else if (currentPage >= totalPages - 2) {
-          pageNum = totalPages - 4 + i;
-        } else {
-          pageNum = currentPage - 2 + i;
-        }
-
-        return (
-          <button
-            key={pageNum}
-            onClick={() => onPageChange(pageNum)}
-            className={`px-4 py-2 border rounded-md ${
-              currentPage === pageNum
-                ? 'bg-[#00A19D] text-white'
-                : 'hover:bg-gray-100'
-            }`}
+    <Pagination className={className}>
+      <PaginationContent>
+        <PaginationItem>
+          <Button
+            variant="outline"
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage === 1}
           >
-            {pageNum}
-          </button>
-        );
-      })}
+            Anterior
+          </Button>
+        </PaginationItem>
 
-      {totalPages > 5 && currentPage < totalPages - 2 && (
-        <span className="px-2">...</span>
-      )}
+        {visiblePages().map((page) => (
+          <PaginationItem key={page}>
+            <Button
+              variant={page === currentPage ? "default" : "outline"}
+              onClick={() => onPageChange(page)}
+            >
+              {page}
+            </Button>
+          </PaginationItem>
+        ))}
 
-      {totalPages > 5 && currentPage < totalPages - 2 && (
-        <button
-          onClick={() => onPageChange(totalPages)}
-          className="px-4 py-2 border rounded-md hover:bg-gray-100"
-        >
-          {totalPages}
-        </button>
-      )}
-
-      <button
-        onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
-        disabled={currentPage === totalPages}
-        className="px-4 py-2 border rounded-md disabled:opacity-50"
-      >
-        Próxima
-      </button>
-    </div>
-  );
+        <PaginationItem>
+          <Button
+            variant="outline"
+            onClick={() => onPageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Próxima
+          </Button>
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  )
 }

@@ -32,6 +32,12 @@ export function CreditCard({ credit, co2: initialCo2 }: CreditCardProps) {
       </CardHeader>
 
       <CardContent className="space-y-4">
+
+        <div className="text-center">
+          <div className="text-2xl font-bold text-[#00A19D]">
+            Total: R$ {totalPrice.toFixed(2)}
+          </div>
+        </div>
         <div className="flex items-center justify-center border rounded-md w-full max-w-[120px] mx-auto">
           <Button variant="ghost" size="sm" onClick={decrement}>
             -
@@ -40,12 +46,6 @@ export function CreditCard({ credit, co2: initialCo2 }: CreditCardProps) {
           <Button variant="ghost" size="sm" onClick={increment}>
             +
           </Button>
-        </div>
-
-        <div className="text-center">
-          <div className="text-2xl font-bold text-[#00A19D]">
-            Total: R$ {totalPrice.toFixed(2)}
-          </div>
         </div>
       </CardContent>
 

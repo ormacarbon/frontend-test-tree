@@ -1,4 +1,3 @@
-// src/server/getCreditPrice.ts
 interface ICreditData {
   id: string;
   amout: number;

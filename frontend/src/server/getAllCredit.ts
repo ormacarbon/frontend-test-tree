@@ -6,7 +6,6 @@ export interface ICreditData {
   updatedAt: string;
 }
 
-// server/getAllCredit.ts
 export async function getAllCredit(): Promise<ICreditData[]> {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/credit-price`);
