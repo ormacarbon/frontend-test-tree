@@ -17,9 +17,6 @@ export interface PaymentRequest {
 export interface SuccessResponse {
   status: 'success';
   message: string;
-  payment_id: string;
-  amout: number;
-  credit_amount: number;
 }
 
 export interface ErrorResponse {
